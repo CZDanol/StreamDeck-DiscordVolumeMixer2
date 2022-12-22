@@ -1,4 +1,4 @@
 #pragma once
 
 class DVMPlugin;
-class DVMPluginDevice;
+class DVMDevice;
