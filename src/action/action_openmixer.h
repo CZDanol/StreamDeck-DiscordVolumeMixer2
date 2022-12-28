@@ -1,8 +1,9 @@
 #pragma once
 
-#include <qtstreamdeck2/qstreamdeckaction.h>
+#include "dvmaction.h"
 
-class Action_OpenMixer : public QStreamDeckAction {
+class Action_OpenMixer : public DVMAction {
+Q_OBJECT
 
 public:
 	Action_OpenMixer();

@@ -1,5 +1,7 @@
 #include "action_openmixer.h"
 
+#include "dvmplugin.h"
+
 Action_OpenMixer::Action_OpenMixer() {
 	connect(this, &QStreamDeckAction::keyDown, this, &Action_OpenMixer::onKeyDown);
 }
@@ -14,5 +16,6 @@ void Action_OpenMixer::onKeyDown() {
 		{+DT::streamDeckPlus,   "Discord Volume Mixer+"},
 	};
 
-	device()->switchToProfile(profileNameByDeviceType.value(+device().deviceType(), "Discord Volume Mixer"));
+	device()->switchToProfile(profileNameByDeviceType.value(+device()->deviceType(), "Discord Volume Mixer"));
+	plugin()->updateChannelMembersData();
 }

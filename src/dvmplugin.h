@@ -5,7 +5,7 @@
 #include <QSettings>
 
 #include "declares.h"
-#include "channelmember.h"
+#include "voicechannelmember.h"
 
 class DVMPlugin : public QStreamDeckPluginT<DVMDevice> {
 Q_OBJECT
@@ -14,21 +14,33 @@ public:
 	DVMPlugin();
 	~DVMPlugin();
 
-public:
+public slots:
 	/// Reloads all channel member data
 	void updateChannelMembersData();
 
 public:
-	QDiscord discord;
-
-	/// I'm using Qt settings library instead of the StreamDeck globalSettings functionality.
-	/// With the SD globalSetttings you have to asynchronously ask and wait to it so it's not available right away, which is a bit annoying.
-	QSettings settings;
+	/// Processes voice state update for the user itself
+	void updateSelfVoiceState(const QDiscordMessage &msg);
 
 public:
-	QMap<QString, ChannelMember> channelMembers;
+	QDiscord discord;
+
+public:
+	QString currentVoiceChannelID;
+	QMap<QString, VoiceChannelMember> voiceChannelMembers;
+	QSet<QString> speakingUsers;
+
+	int voiceChannelMemberIxOffset = 0;
+
+public:
+	bool isDeafened = false;
+	bool isMicrophoneMuted = false;
+
+signals:
+	/// Updates text & states of all user related buttons
+	void buttonsUpdateRequested();
 
 private slots:
-	void onDiscordMessageReceived(const QJsonObject &json);
+	void onDiscordMessageReceived(const QDiscordMessage &msg);
 
 };

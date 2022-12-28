@@ -1,8 +1,12 @@
 #pragma once
 
 #include <QString>
+#include <QJsonObject>
 
-class ChannelMember {
+class VoiceChannelMember {
+
+public:
+	static VoiceChannelMember fromJson(const QJsonObject &json);
 
 public:
 	QString nick;
