@@ -7,11 +7,26 @@
 DVMPlugin::DVMPlugin() {
 	registerActionType<Action_OpenMixer>("cz.danol.discordmixer.openmixer");
 
+	connect(this, &QStreamDeckPlugin::eventReceived, this, &DVMPlugin::onStreamDeckEventReceived);
+
 	connect(&discord, &QDiscord::messageReceived, this, &DVMPlugin::onDiscordMessageReceived);
+	connect(&discord, &QDiscord::avatarReady, this, &DVMPlugin::buttonsUpdateRequested);
+
+	connectToDiscord();
 }
 
 DVMPlugin::~DVMPlugin() {
 
+}
+
+void DVMPlugin::connectToDiscord() {
+	if(discord.isConnected())
+		return;
+
+	discord.connect(globalSetting("client_id").toString(), globalSetting("client_secret").toString());
+
+	// Update buttons regardless whether the connection was successfull or not
+	emit buttonsUpdateRequested();
 }
 
 void DVMPlugin::updateChannelMembersData() {
@@ -123,4 +138,10 @@ void DVMPlugin::onDiscordMessageReceived(const QDiscordMessage &msg) {
 	}
 
 	emit buttonsUpdateRequested();
+}
+
+void DVMPlugin::onStreamDeckEventReceived(const QStreamDeckEvent &e) {
+	// Try connecting to discord whenever any button is pressed
+	if(!discord.isConnected())
+		connectToDiscord();
 }

@@ -1,0 +1,212 @@
+{
+  "Actions": [
+    {
+      "Icon": "icons/icons8_discord_new_72px",
+      "Name": "Discord Volume Mixer",
+      "States": [
+        {
+          "Image": "icons/icons8_discord_new_72px",
+          "ShowTitle": false
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "Tooltip": "Opens a mixer for Discord voice chat",
+      "PropertyInspectorPath": "inspector/default.html",
+      "UUID": "cz.danol.discordmixer.openmixer"
+    },
+    {
+      "Icon": "icons/icons8_arrow_up_72px",
+      "Name": "[DVM] Back",
+      "States": [
+        {
+          "Image": "icons/icons8_arrow_up_72px",
+          "ShowTitle": false
+        }
+      ],
+      "Tooltip": "Closes the volume mixer",
+      "UUID": "cz.danol.discordmixer.back"
+    },
+    {
+      "Icon": "icons/icons8_user_72px",
+      "Name": "[DVM] User",
+      "States": [
+        {
+          "Image": "icons/noicon",
+          "ShowTitle": true,
+          "TitleAlignment": "middle",
+          "FontFamily": "Verdana",
+          "FontSize": "8"
+        },
+        {
+          "Image": "icons/noicon",
+          "ShowTitle": true,
+          "TitleAlignment": "middle",
+          "FontFamily": "Verdana",
+          "FontSize": "8"
+        }
+      ],
+      "PropertyInspectorPath": "inspector/user.html",
+      "Tooltip": "User button",
+      "UUID": "cz.danol.discordmixer.user"
+    },
+    {
+      "Icon": "icons/icons8_plus_math_72px",
+      "Name": "[DVM] Volume up",
+      "States": [
+        {
+          "Image": "icons/icons8_plus_math_72px",
+          "ShowTitle": false
+        },
+        {
+          "Image": "icons/noicon",
+          "ShowTitle": false
+        }
+      ],
+      "PropertyInspectorPath": "inspector/user.html",
+      "Tooltip": "Increase volume",
+      "UUID": "cz.danol.discordmixer.volumeup"
+    },
+    {
+      "Icon": "icons/icons8_minus_72px",
+      "Name": "[DVM] Volume down",
+      "States": [
+        {
+          "Image": "icons/icons8_minus_72px",
+          "ShowTitle": false
+        },
+        {
+          "Image": "icons/noicon",
+          "ShowTitle": false
+        }
+      ],
+      "PropertyInspectorPath": "inspector/user.html",
+      "Tooltip": "Decrease volume",
+      "UUID": "cz.danol.discordmixer.volumedown"
+    },
+    {
+      "Icon": "icons/icons8_forward_72px",
+      "Name": "[DVM] Next page",
+      "States": [
+        {
+          "Image": "icons/icons8_forward_72px",
+          "ShowTitle": true,
+          "TitleAlignment": "top",
+          "FontFamily": "Verdana",
+          "FontSize": "8"
+        },
+        {
+          "Image": "icons/noicon",
+          "ShowTitle": true,
+          "TitleAlignment": "top",
+          "FontFamily": "Verdana",
+          "FontSize": "8"
+        }
+      ],
+      "Tooltip": "Go to next page",
+      "PropertyInspectorPath": "inspector/page.html",
+      "UUID": "cz.danol.discordmixer.nextpage"
+    },
+    {
+      "Icon": "icons/icons8_back_72px",
+      "Name": "[DVM] Previous page",
+      "States": [
+        {
+          "Image": "icons/icons8_back_72px",
+          "ShowTitle": true,
+          "TitleAlignment": "top",
+          "FontFamily": "Verdana",
+          "FontSize": "8"
+        },
+        {
+          "Image": "icons/noicon",
+          "ShowTitle": true,
+          "TitleAlignment": "top",
+          "FontFamily": "Verdana",
+          "FontSize": "8"
+        }
+      ],
+      "Tooltip": "Goto previous page",
+      "PropertyInspectorPath": "inspector/page.html",
+      "UUID": "cz.danol.discordmixer.previouspage"
+    },
+    {
+      "Icon": "icons/icons8_mute_unmute_72px",
+      "Name": "[DVM] Mute/unmute microphone",
+      "States": [
+        {
+          "Image": "icons/icons8_microphone_72px",
+          "ShowTitle": false
+        },
+        {
+          "Image": "icons/icons8_mute_unmute_72px",
+          "ShowTitle": false
+        }
+      ],
+      "Tooltip": "Mute/unmute microphone",
+      "PropertyInspectorPath": "inspector/default.html",
+      "UUID": "cz.danol.discordmixer.microphone"
+    },
+    {
+      "Icon": "icons/icons8_no_audio_72px",
+      "Name": "[DVM] Mute/unmute audio (deafen)",
+      "States": [
+        {
+          "Image": "icons/icons8_audio_72px",
+          "ShowTitle": false
+        },
+        {
+          "Image": "icons/icons8_no_audio_72px",
+          "ShowTitle": false
+        }
+      ],
+      "Tooltip": "Mute/unmute audio (deafen)",
+      "PropertyInspectorPath": "inspector/default.html",
+      "UUID": "cz.danol.discordmixer.deafen"
+    }
+  ],
+  "SDKVersion": 2,
+  "Author": "Danol",
+  "CodePathWin": "bin/streamdeck-discordmixer.exe",
+  "Description": "Provides a mixer for Discord voice chat that allows adjusting volume for individual users.\nThis application uses Icons8 icons (https://icons8.com)",
+  "Category": "Discord Volume Mixer",
+  "CategoryIcon": "icons/icons8_discord_new_72px",
+  "Name": "Discord Volume Mixer",
+  "Icon": "icons/icons8_discord_new_72px",
+  "URL": "https://www.github.com/CZDanol/streamdeck-discordmixer",
+  "Version": "2.0.0.0",
+  "Profiles": [
+    {
+      "Name": "Discord Volume Mixer",
+      "DeviceType": 0,
+      "ReadOnly": false,
+      "DontAutoSwitchWhenInstalled": true
+    },
+    {
+      "Name": "Discord Volume Mixer",
+      "DeviceType": 3,
+      "ReadOnly": false,
+      "DontAutoSwitchWhenInstalled": true
+    },
+    {
+      "Name": "Discord Volume Mixer XL",
+      "DeviceType": 2,
+      "ReadOnly": false,
+      "DontAutoSwitchWhenInstalled": true
+    },
+    {
+      "Name": "Discord Volume Mixer Mini",
+      "DeviceType": 1,
+      "ReadOnly": false,
+      "DontAutoSwitchWhenInstalled": true
+    }
+  ],
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Software": {
+    "MinimumVersion": "4.1"
+  }
+}

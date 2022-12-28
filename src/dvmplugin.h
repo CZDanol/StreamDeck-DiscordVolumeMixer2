@@ -15,6 +15,9 @@ public:
 	~DVMPlugin();
 
 public slots:
+	/// Attempts to connect to Discord
+	void connectToDiscord();
+
 	/// Reloads all channel member data
 	void updateChannelMembersData();
 
@@ -42,5 +45,6 @@ signals:
 
 private slots:
 	void onDiscordMessageReceived(const QDiscordMessage &msg);
+	void onStreamDeckEventReceived(const QStreamDeckEvent &e);
 
 };
