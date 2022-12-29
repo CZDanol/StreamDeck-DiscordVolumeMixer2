@@ -32,7 +32,7 @@ public:
 public:
 	QString currentVoiceChannelID;
 	QMap<QString, VoiceChannelMember> voiceChannelMembers;
-	QSet<QString> speakingUsers;
+	QSet<QString> speakingVoiceChannelMembers;
 
 	int voiceChannelMemberIxOffset = 0;
 

@@ -6,4 +6,9 @@
 
 class DVMDevice : public QStreamDeckDeviceT<DVMPlugin> {
 Q_OBJECT
+
+public:
+	/// Used for paging voice channel members
+	int voiceChannelMemberIndexOffset = 0;
+
 };

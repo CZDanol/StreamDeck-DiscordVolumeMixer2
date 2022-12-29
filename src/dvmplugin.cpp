@@ -3,9 +3,11 @@
 #include "dvmdevice.h"
 
 #include "action/action_openmixer.h"
+#include "action/action_indexeduser.h"
 
 DVMPlugin::DVMPlugin() {
 	registerActionType<Action_OpenMixer>("cz.danol.discordmixer.openmixer");
+	registerActionType<Action_IndexedUser>("cz.danol.discordmixer.user");
 
 	connect(this, &QStreamDeckPlugin::eventReceived, this, &DVMPlugin::onStreamDeckEventReceived);
 

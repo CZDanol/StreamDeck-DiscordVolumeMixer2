@@ -28,7 +28,7 @@
     },
     {
       "Icon": "icons/icons8_user_72px",
-      "Name": "[DVM] User",
+      "Name": "[DVM] Indexed user",
       "States": [
         {
           "Image": "icons/noicon",
@@ -51,7 +51,7 @@
     },
     {
       "Icon": "icons/icons8_plus_math_72px",
-      "Name": "[DVM] Volume up",
+      "Name": "[DVM] Indexed user volume up",
       "States": [
         {
           "Image": "icons/icons8_plus_math_72px",
@@ -68,7 +68,7 @@
     },
     {
       "Icon": "icons/icons8_minus_72px",
-      "Name": "[DVM] Volume down",
+      "Name": "[DVM] Indexed user volume down",
       "States": [
         {
           "Image": "icons/icons8_minus_72px",
