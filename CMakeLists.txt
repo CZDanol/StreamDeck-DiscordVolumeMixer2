@@ -7,7 +7,7 @@ project(streamdeck-discordmixer LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(BUILD_IN_STREAMDECK_PLUGINS_DIR OFF)
+option(BUILD_IN_STREAMDECK_PLUGINS_DIR "Whether to build to the 'bin' directory or to the stream deck plugins directory." OFF)
 
 # ===========================================
 # Target setup
@@ -57,6 +57,7 @@ target_include_directories(${target} PRIVATE "${PROJECT_SOURCE_DIR}/deps/qtdisco
 
 # Copy files from dist
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/dist/" DESTINATION ${target_directory})
+install(DIRECTORY "${PROJECT_SOURCE_DIR}/deps/qtstreamdeck2/dist/" DESTINATION ${target_directory})
 
 # Run windeployqt
 get_target_property(QMAKE_FILEPATH Qt6::qmake IMPORTED_LOCATION)

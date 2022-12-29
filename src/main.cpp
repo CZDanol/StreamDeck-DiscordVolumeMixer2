@@ -31,11 +31,10 @@ int main(int argc, char *argv[]) {
 
 	QGuiApplication app(argc, argv);
 	qInstallMessageHandler(&messageLogger);
+	qDebug() << QDateTime::currentDateTime().toString() << "Plugin starting";
 
 	DVMPlugin plugin;
-	plugin.init(app);
-
-	qDebug() << QDateTime::currentDateTime().toString() << "Plugin starting";
+	plugin.init("cz.danol.discordmixer", app);
 
 	return QGuiApplication::exec();
 }

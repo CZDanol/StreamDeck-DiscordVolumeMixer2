@@ -141,6 +141,8 @@ void DVMPlugin::onDiscordMessageReceived(const QDiscordMessage &msg) {
 }
 
 void DVMPlugin::onStreamDeckEventReceived(const QStreamDeckEvent &e) {
+	using ET = QStreamDeckEvent::EventType;
+
 	// Try connecting to discord whenever any button is pressed
 	if(!discord.isConnected())
 		connectToDiscord();

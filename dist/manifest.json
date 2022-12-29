@@ -11,7 +11,7 @@
       ],
       "SupportedInMultiActions": false,
       "Tooltip": "Opens a mixer for Discord voice chat",
-      "PropertyInspectorPath": "inspector/default.html",
+      "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "UUID": "cz.danol.discordmixer.openmixer"
     },
     {
@@ -45,7 +45,7 @@
           "FontSize": "8"
         }
       ],
-      "PropertyInspectorPath": "inspector/user.html",
+      "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "Tooltip": "User button",
       "UUID": "cz.danol.discordmixer.user"
     },
@@ -62,7 +62,7 @@
           "ShowTitle": false
         }
       ],
-      "PropertyInspectorPath": "inspector/user.html",
+      "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "Tooltip": "Increase volume",
       "UUID": "cz.danol.discordmixer.volumeup"
     },
@@ -79,7 +79,7 @@
           "ShowTitle": false
         }
       ],
-      "PropertyInspectorPath": "inspector/user.html",
+      "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "Tooltip": "Decrease volume",
       "UUID": "cz.danol.discordmixer.volumedown"
     },
@@ -103,7 +103,7 @@
         }
       ],
       "Tooltip": "Go to next page",
-      "PropertyInspectorPath": "inspector/page.html",
+      "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "UUID": "cz.danol.discordmixer.nextpage"
     },
     {
@@ -126,7 +126,7 @@
         }
       ],
       "Tooltip": "Goto previous page",
-      "PropertyInspectorPath": "inspector/page.html",
+      "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "UUID": "cz.danol.discordmixer.previouspage"
     },
     {
@@ -143,7 +143,7 @@
         }
       ],
       "Tooltip": "Mute/unmute microphone",
-      "PropertyInspectorPath": "inspector/default.html",
+      "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "UUID": "cz.danol.discordmixer.microphone"
     },
     {
@@ -160,7 +160,7 @@
         }
       ],
       "Tooltip": "Mute/unmute audio (deafen)",
-      "PropertyInspectorPath": "inspector/default.html",
+      "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "UUID": "cz.danol.discordmixer.deafen"
     }
   ],
