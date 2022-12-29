@@ -11,4 +11,6 @@ public:
 	/// Used for paging voice channel members
 	int voiceChannelMemberIndexOffset = 0;
 
+	int vcmNextPageButtonCount = 0, vcmPrevPageButtonCount = 0;
+
 };

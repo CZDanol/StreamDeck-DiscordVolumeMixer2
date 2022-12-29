@@ -1,4 +1,4 @@
-#include "action_indexeduser.h"
+#include "action_indexedvcminfo.h"
 
 #include <QPainter>
 
@@ -6,21 +6,20 @@
 
 #include "dvmplugin.h"
 
-Action_IndexedUser::Action_IndexedUser() {
-	connect(this, &QStreamDeckAction::initialized, this, &Action_IndexedUser::onInitialized);
+Action_IndexedVCMInfo::Action_IndexedVCMInfo() {
+	connect(this, &QStreamDeckAction::keyDown, this, &Action_IndexedVCMInfo::onClicked);
 }
 
-void Action_IndexedUser::update() {
-	const VoiceChannelMember vcm = voiceChannelMember();
-	const bool isEmpty = vcm.nick.isEmpty();
-	const bool isSpeaking = !isEmpty && plugin()->speakingVoiceChannelMembers.contains(vcm.userID);
+void Action_IndexedVCMInfo::update() {
+	const VoiceChannelMember &vcm = voiceChannelMember();
+	const bool isSpeaking = vcm.isValid && plugin()->speakingVoiceChannelMembers.contains(vcm.userID);
 
 	const QString volumeStr = vcm.isMuted ? "MUTED" : QStringLiteral("%1 %").arg(QString::number(vcm.volume));
 
 	QString newTitle;
 	if(!plugin()->discord.isConnected())
 		newTitle = plugin()->discord.connectionError();
-	else if(!isEmpty)
+	else if(vcm.isValid)
 		newTitle = QStringLiteral("%1\n%3\n%2").arg(vcm.nick, volumeStr, isSpeaking ? ">>SPEAKING<<" : vcm.isMuted ? "##" : "");
 	else if(plugin()->voiceChannelMembers.isEmpty() && !plugin()->globalSetting("hideNobodyInVoiceChatText").toBool())
 		newTitle = QString("NOBODY\nIN\nVOICE CHAT");
@@ -59,12 +58,22 @@ void Action_IndexedUser::update() {
 	}
 }
 
-void Action_IndexedUser::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
-	b.addCheckBox("hideNobodyInVoiceChatText", "Hide NIVC", "Hide 'Nobody in voice chat' text (global)").linkWithGlobalSetting();
+void Action_IndexedVCMInfo::onClicked() {
+	VoiceChannelMember &vcm = voiceChannelMember();
+	if(!vcm.isValid)
+		return;
 
-	IndexedUserAction::buildPropertyInspector(b);
+	vcm.isMuted ^= true;
+
+	plugin()->discord.sendCommand(+QDiscord::CommandType::setUserVoiceSettings, QJsonObject{
+		{"user_id", vcm.userID},
+		{"mute", vcm.isMuted},
+	});
+	emit plugin()->buttonsUpdateRequested();
 }
 
-void Action_IndexedUser::onInitialized() {
-	connect(plugin(), &DVMPlugin::globalSettingsChanged, this, &IndexedUserAction::update);
+void Action_IndexedVCMInfo::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
+	b.addCheckBox("hideNobodyInVoiceChatText", "Hide NIVC", "Hide 'Nobody in voice chat' text (global)").linkWithGlobalSetting();
+
+	IndexedVCMAction::buildPropertyInspector(b);
 }

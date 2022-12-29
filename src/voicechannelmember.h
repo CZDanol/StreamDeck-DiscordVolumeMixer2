@@ -13,5 +13,6 @@ public:
 	QString userID, avatarID;
 	float volume = 0;
 	bool isMuted = false;
+	bool isValid = false;
 
 };

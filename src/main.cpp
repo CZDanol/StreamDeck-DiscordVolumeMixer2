@@ -2,6 +2,7 @@
 
 #include <QFile>
 #include <QGuiApplication>
+#include <QThread>
 
 void messageLogger(QtMsgType t, const QMessageLogContext &, const QString &msg) {
 	static QFile lf("log.txt"), clf("clog.txt");
@@ -28,6 +29,8 @@ void messageLogger(QtMsgType t, const QMessageLogContext &, const QString &msg) 
 
 int main(int argc, char *argv[]) {
 	QCoreApplication::setAttribute(Qt::AA_PluginApplication);
+
+	//QThread::sleep(10);
 
 	QGuiApplication app(argc, argv);
 	qInstallMessageHandler(&messageLogger);

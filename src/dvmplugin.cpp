@@ -3,18 +3,20 @@
 #include "dvmdevice.h"
 
 #include "action/action_openmixer.h"
-#include "action/action_indexeduser.h"
+#include "action/action_indexedvcminfo.h"
+#include "action/action_indexedvcmvolume.h"
 
 DVMPlugin::DVMPlugin() {
 	registerActionType<Action_OpenMixer>("cz.danol.discordmixer.openmixer");
-	registerActionType<Action_IndexedUser>("cz.danol.discordmixer.user");
+	registerActionType<Action_IndexedVCMInfo>("cz.danol.discordmixer.user");
+	registerActionType<Action_IndexedVCMVolume>("cz.danol.discordmixer.volumeup");
+	registerActionType<Action_IndexedVCMVolume>("cz.danol.discordmixer.volumedown");
 
+	connect(this, &QStreamDeckPlugin::initialized, this, &DVMPlugin::onInitialized);
 	connect(this, &QStreamDeckPlugin::eventReceived, this, &DVMPlugin::onStreamDeckEventReceived);
 
 	connect(&discord, &QDiscord::messageReceived, this, &DVMPlugin::onDiscordMessageReceived);
 	connect(&discord, &QDiscord::avatarReady, this, &DVMPlugin::buttonsUpdateRequested);
-
-	connectToDiscord();
 }
 
 DVMPlugin::~DVMPlugin() {
@@ -147,6 +149,12 @@ void DVMPlugin::onDiscordMessageReceived(const QDiscordMessage &msg) {
 	}
 
 	emit buttonsUpdateRequested();
+}
+
+void DVMPlugin::onInitialized() {
+	setGlobalSettingDefault("voiceChannelVolumeButtonStep", 5);
+
+	connectToDiscord();
 }
 
 void DVMPlugin::onStreamDeckEventReceived(const QStreamDeckEvent &e) {

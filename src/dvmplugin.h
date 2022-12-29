@@ -45,6 +45,7 @@ signals:
 	void buttonsUpdateRequested();
 
 private slots:
+	void onInitialized();
 	void onDiscordMessageReceived(const QDiscordMessage &msg);
 	void onStreamDeckEventReceived(const QStreamDeckEvent &e);
 

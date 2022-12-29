@@ -9,5 +9,6 @@ VoiceChannelMember VoiceChannelMember::fromJson(const QJsonObject &json) {
 		.avatarID = json["user"]["avatar"].toString(),
 		.volume = float(qRound(QDiscord::ipcToUIVolume(json["volume"].toDouble()))),
 		.isMuted = json["mute"].toBool(),
+		.isValid = true,
 	};
 }

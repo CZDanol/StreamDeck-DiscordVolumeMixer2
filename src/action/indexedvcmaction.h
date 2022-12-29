@@ -3,17 +3,14 @@
 #include "dvmaction.h"
 #include "voicechannelmember.h"
 
-class IndexedUserAction : public DVMAction {
+class IndexedVCMAction : public DVMAction {
 
 public:
-	IndexedUserAction();
+	IndexedVCMAction();
 
 public:
 	int voiceChannelMemberIndex();
-	VoiceChannelMember voiceChannelMember();
-
-public slots:
-	virtual void update() = 0;
+	VoiceChannelMember &voiceChannelMember();
 
 protected:
 	virtual void buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) override;

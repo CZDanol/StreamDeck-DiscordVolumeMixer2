@@ -1,12 +1,12 @@
 #pragma once
 
-#include "indexeduseraction.h"
+#include "indexedvcmaction.h"
 
-class Action_IndexedUser : public IndexedUserAction {
+class Action_IndexedVCMInfo : public IndexedVCMAction {
 Q_OBJECT
 
 public:
-	Action_IndexedUser();
+	Action_IndexedVCMInfo();
 
 public slots:
 	virtual void update() override;
@@ -15,7 +15,7 @@ protected:
 	virtual void buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) override;
 
 private slots:
-	void onInitialized();
+	void onClicked();
 
 private:
 	QString title_;

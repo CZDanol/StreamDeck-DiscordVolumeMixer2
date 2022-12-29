@@ -1,11 +1,11 @@
 {
   "Actions": [
     {
-      "Icon": "icons/icons8_discord_new_72px",
+      "Icon": "icons/icons8_discord_new_48px",
       "Name": "Discord Volume Mixer",
       "States": [
         {
-          "Image": "icons/icons8_discord_new_72px",
+          "Image": "icons/icons8_discord_new_48px",
           "ShowTitle": false
         }
       ],
@@ -15,11 +15,11 @@
       "UUID": "cz.danol.discordmixer.openmixer"
     },
     {
-      "Icon": "icons/icons8_arrow_up_72px",
+      "Icon": "icons/icons8_arrow_up_48px",
       "Name": "[DVM] Back",
       "States": [
         {
-          "Image": "icons/icons8_arrow_up_72px",
+          "Image": "icons/icons8_arrow_up_48px",
           "ShowTitle": false
         }
       ],
@@ -27,7 +27,7 @@
       "UUID": "cz.danol.discordmixer.back"
     },
     {
-      "Icon": "icons/icons8_user_72px",
+      "Icon": "icons/icons8_user_48px",
       "Name": "[DVM] Indexed user",
       "States": [
         {
@@ -50,11 +50,11 @@
       "UUID": "cz.danol.discordmixer.user"
     },
     {
-      "Icon": "icons/icons8_plus_math_72px",
+      "Icon": "icons/icons8_plus_math_48px",
       "Name": "[DVM] Indexed user volume up",
       "States": [
         {
-          "Image": "icons/icons8_plus_math_72px",
+          "Image": "icons/icons8_plus_math_48px",
           "ShowTitle": false
         },
         {
@@ -67,11 +67,11 @@
       "UUID": "cz.danol.discordmixer.volumeup"
     },
     {
-      "Icon": "icons/icons8_minus_72px",
+      "Icon": "icons/icons8_minus_48px",
       "Name": "[DVM] Indexed user volume down",
       "States": [
         {
-          "Image": "icons/icons8_minus_72px",
+          "Image": "icons/icons8_minus_48px",
           "ShowTitle": false
         },
         {
@@ -84,11 +84,11 @@
       "UUID": "cz.danol.discordmixer.volumedown"
     },
     {
-      "Icon": "icons/icons8_forward_72px",
+      "Icon": "icons/icons8_sort_right_48px",
       "Name": "[DVM] Next page",
       "States": [
         {
-          "Image": "icons/icons8_forward_72px",
+          "Image": "icons/icons8_sort_right_48px",
           "ShowTitle": true,
           "TitleAlignment": "top",
           "FontFamily": "Verdana",
@@ -107,11 +107,11 @@
       "UUID": "cz.danol.discordmixer.nextpage"
     },
     {
-      "Icon": "icons/icons8_back_72px",
+      "Icon": "icons/icons8_sort_left_48px",
       "Name": "[DVM] Previous page",
       "States": [
         {
-          "Image": "icons/icons8_back_72px",
+          "Image": "icons/icons8_sort_left_48px",
           "ShowTitle": true,
           "TitleAlignment": "top",
           "FontFamily": "Verdana",
@@ -130,15 +130,15 @@
       "UUID": "cz.danol.discordmixer.previouspage"
     },
     {
-      "Icon": "icons/icons8_mute_unmute_72px",
+      "Icon": "icons/icons8_block_microphone_48px",
       "Name": "[DVM] Mute/unmute microphone",
       "States": [
         {
-          "Image": "icons/icons8_microphone_72px",
+          "Image": "icons/icons8_microphone_48px",
           "ShowTitle": false
         },
         {
-          "Image": "icons/icons8_mute_unmute_72px",
+          "Image": "icons/icons8_block_microphone_48px",
           "ShowTitle": false
         }
       ],
@@ -147,15 +147,15 @@
       "UUID": "cz.danol.discordmixer.microphone"
     },
     {
-      "Icon": "icons/icons8_no_audio_72px",
+      "Icon": "icons/icons8_no_audio_48px",
       "Name": "[DVM] Mute/unmute audio (deafen)",
       "States": [
         {
-          "Image": "icons/icons8_audio_72px",
+          "Image": "icons/icons8_speaker_48px",
           "ShowTitle": false
         },
         {
-          "Image": "icons/icons8_no_audio_72px",
+          "Image": "icons/icons8_no_audio_48px",
           "ShowTitle": false
         }
       ],
@@ -169,9 +169,9 @@
   "CodePathWin": "bin/streamdeck-discordmixer.exe",
   "Description": "Provides a mixer for Discord voice chat that allows adjusting volume for individual users.\nThis application uses Icons8 icons (https://icons8.com)",
   "Category": "Discord Volume Mixer",
-  "CategoryIcon": "icons/icons8_discord_new_72px",
+  "CategoryIcon": "icons/icons8_discord_new_48px",
   "Name": "Discord Volume Mixer",
-  "Icon": "icons/icons8_discord_new_72px",
+  "Icon": "icons/icons8_discord_new_48px",
   "URL": "https://www.github.com/CZDanol/streamdeck-discordmixer",
   "Version": "2.0.0.0",
   "Profiles": [
