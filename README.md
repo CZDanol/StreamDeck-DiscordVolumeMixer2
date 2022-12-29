@@ -5,11 +5,12 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 * You can **mute** each user by clicking on his name button.
 * **Indication** when a user is **speaking**.
 * **Self mute and deafen** buttons (deafen only on XL, mute on XL and STD)
-* Supports **Standard, Mini, XL and Mobile Decks**.
+* Supports **Standard, Mini, XL, Mobile and SD+ Decks**.
 * You can adjust the audio mixer panel to your needs, it's quite modular - you can move buttons around etc.
 * Tested on W10x64.
 
 ![](etc/sshot.png)
+![](etc/sshot2.png)
 
 ### Support
 * **!!! First read Configuration below !!!**
