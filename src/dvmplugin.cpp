@@ -5,12 +5,21 @@
 #include "action/action_openmixer.h"
 #include "action/action_indexedvcminfo.h"
 #include "action/action_indexedvcmvolume.h"
+#include "action/action_vcmpaging.h"
+#include "action/action_back.h"
+#include "action/action_deafen.h"
+#include "action/action_microphone.h"
 
 DVMPlugin::DVMPlugin() {
 	registerActionType<Action_OpenMixer>("cz.danol.discordmixer.openmixer");
 	registerActionType<Action_IndexedVCMInfo>("cz.danol.discordmixer.user");
 	registerActionType<Action_IndexedVCMVolume>("cz.danol.discordmixer.volumeup");
 	registerActionType<Action_IndexedVCMVolume>("cz.danol.discordmixer.volumedown");
+	registerActionType<Action_VCMPaging>("cz.danol.discordmixer.nextpage");
+	registerActionType<Action_VCMPaging>("cz.danol.discordmixer.previouspage");
+	registerActionType<Action_Back>("cz.danol.discordmixer.back");
+	registerActionType<Action_Microphone>("cz.danol.discordmixer.microphone");
+	registerActionType<Action_Deafen>("cz.danol.discordmixer.deafen");
 
 	connect(this, &QStreamDeckPlugin::initialized, this, &DVMPlugin::onInitialized);
 	connect(this, &QStreamDeckPlugin::eventReceived, this, &DVMPlugin::onStreamDeckEventReceived);
@@ -34,6 +43,15 @@ void DVMPlugin::connectToDiscord() {
 			{"evt", "VOICE_CHANNEL_SELECT"}
 		});
 
+		{
+			auto r = discord.sendCommand(+QDiscord::CommandType::getVoiceSettings);
+			connect(r, &QDiscordReply::success, this, [this](const QDiscordMessage &msg) {
+				isMicrophoneMuted = msg.data["mute"].toBool();
+				isDeafened = msg.data["deaf"].toBool();
+				emit buttonsUpdateRequested();
+			});
+		}
+
 		updateChannelMembersData();
 	}
 	else
@@ -43,31 +61,11 @@ void DVMPlugin::connectToDiscord() {
 void DVMPlugin::updateChannelMembersData() {
 	QDiscordReply *r = discord.sendCommand(+QDiscord::CommandType::getSelectedVoiceChannel);
 	connect(r, &QDiscordReply::success, this, [this](const QDiscordMessage &msg) {
-		const QString voiceChannelID = msg.json["data"]["id"].toString();
-
-		// If the channel changed, update event subscribtions
-		if(voiceChannelID != currentVoiceChannelID) {
-			static const QStringList events{
-				"VOICE_STATE_UPDATE", "VOICE_STATE_CREATE", "VOICE_STATE_DELETE", "SPEAKING_START", "SPEAKING_STOP"
-			};
-			const auto evf = [&](const QString &cmd) {
-				const QJsonObject args{{"channel_id", voiceChannelID}};
-				for(const QString &e: events)
-					discord.sendCommand(cmd, args, {{"evt", e}});
-			};
-
-			if(!currentVoiceChannelID.isNull())
-				evf(+QDiscord::CommandType::unsubscribe);
-
-			currentVoiceChannelID = voiceChannelID;
-
-			if(!currentVoiceChannelID.isNull())
-				evf(+QDiscord::CommandType::subscribe);
-		}
+		updateCurrentVoiceChannel(msg.data["id"].toString());
 
 		// Update voice channel member list
 		{
-			const auto arr = msg.json["data"]["voice_states"].toArray();
+			const auto arr = msg.data["voice_states"].toArray();
 
 			voiceChannelMembers.clear();
 
@@ -86,13 +84,36 @@ void DVMPlugin::updateChannelMembersData() {
 }
 
 void DVMPlugin::updateSelfVoiceState(const QDiscordMessage &msg) {
-	const QJsonObject json = msg.json["data"].toObject();
+	const QJsonObject json = msg.data;
 
 	if(auto v = json["voice_state"]["self_mute"]; !v.isNull())
 		isMicrophoneMuted = v.toBool();
 
 	if(auto v = json["voice_state"]["self_deaf"]; !v.isNull())
 		isDeafened = v.toBool();
+}
+
+void DVMPlugin::updateCurrentVoiceChannel(const QString &newVoiceChannel) {
+	// If the channel changed, update event subscribtions
+	if(newVoiceChannel == currentVoiceChannelID)
+		return;
+
+	static const QStringList events{
+		"VOICE_STATE_UPDATE", "VOICE_STATE_CREATE", "VOICE_STATE_DELETE", "SPEAKING_START", "SPEAKING_STOP"
+	};
+	const auto evf = [&](const QString &cmd) {
+		const QJsonObject args{{"channel_id", newVoiceChannel}};
+		for(const QString &e: events)
+			discord.sendCommand(cmd, args, {{"evt", e}});
+	};
+
+	if(!currentVoiceChannelID.isNull())
+		evf(+QDiscord::CommandType::unsubscribe);
+
+	currentVoiceChannelID = newVoiceChannel;
+
+	if(!currentVoiceChannelID.isNull())
+		evf(+QDiscord::CommandType::subscribe);
 }
 
 void DVMPlugin::onDiscordMessageReceived(const QDiscordMessage &msg) {
@@ -102,11 +123,12 @@ void DVMPlugin::onDiscordMessageReceived(const QDiscordMessage &msg) {
 
 		// Voice channel changed
 		case ET::voiceChannelSelect:
+			updateCurrentVoiceChannel(msg.data["channel_id"].toString());
 			updateChannelMembersData();
 			break;
 
 		case ET::voiceStateCreate: {
-			const auto m = VoiceChannelMember::fromJson(msg.json["data"].toObject());
+			const auto m = VoiceChannelMember::fromJson(msg.data);
 			if(m.userID == discord.userID())
 				updateSelfVoiceState(msg);
 
@@ -117,7 +139,7 @@ void DVMPlugin::onDiscordMessageReceived(const QDiscordMessage &msg) {
 		}
 
 		case ET::voiceStateUpdate: {
-			const auto m = VoiceChannelMember::fromJson(msg.json["data"].toObject());
+			const auto m = VoiceChannelMember::fromJson(msg.data);
 			if(m.userID == discord.userID())
 				updateSelfVoiceState(msg);
 
@@ -128,7 +150,7 @@ void DVMPlugin::onDiscordMessageReceived(const QDiscordMessage &msg) {
 		}
 
 		case ET::voiceStateDelete: {
-			voiceChannelMembers.remove(VoiceChannelMember::fromJson(msg.json["data"].toObject()).userID);
+			voiceChannelMembers.remove(VoiceChannelMember::fromJson(msg.data).userID);
 			if(voiceChannelMemberIxOffset >= voiceChannelMembers.size())
 				voiceChannelMemberIxOffset = 0;
 
@@ -136,11 +158,17 @@ void DVMPlugin::onDiscordMessageReceived(const QDiscordMessage &msg) {
 		}
 
 		case ET::speakingStart:
-			speakingVoiceChannelMembers.insert(msg.json["data"]["user_id"].toString());
+			speakingVoiceChannelMembers.insert(msg.data["user_id"].toString());
 			break;
 
 		case ET::speakingStop:
-			speakingVoiceChannelMembers.remove(msg.json["data"]["user_id"].toString());
+			speakingVoiceChannelMembers.remove(msg.data["user_id"].toString());
+			break;
+
+		case ET::voiceSettingsUpdate:
+			isMicrophoneMuted = msg.data["mute"].toBool();
+			isDeafened = msg.data["deaf"].toBool();
+			emit buttonsUpdateRequested();
 			break;
 
 		default:

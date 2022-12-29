@@ -30,7 +30,8 @@ void Action_IndexedVCMVolume::update() {
 }
 
 void Action_IndexedVCMVolume::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
-	b.addSpinBox("voiceChannelVolumeButtonStep", "Volume step (global)").linkWithGlobalSetting();
+	b.addSpinBox("voiceChannelVolumeButtonStep", "Volume step").linkWithGlobalSetting();
+	b.addMessage("Volume step is global for all volume buttons.");
 
 	IndexedVCMAction::buildPropertyInspector(b);
 }
@@ -48,9 +49,9 @@ void Action_IndexedVCMVolume::onPressed() {
 
 void Action_IndexedVCMVolume::onReleased() {
 	repeatTimer_.stop();
-	// Force state update because clicking the action screws up the state
-	state_ = -1;
-	update();
+
+	// Force update state
+	setState(state_);
 }
 
 void Action_IndexedVCMVolume::trigger() {

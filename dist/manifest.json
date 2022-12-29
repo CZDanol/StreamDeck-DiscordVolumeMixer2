@@ -1,11 +1,11 @@
 {
   "Actions": [
     {
-      "Icon": "icons/icons8_discord_new_48px",
+      "Icon": "icons/icons8_discord_new_72px",
       "Name": "Discord Volume Mixer",
       "States": [
         {
-          "Image": "icons/icons8_discord_new_48px",
+          "Image": "icons/icons8_discord_new_72px",
           "ShowTitle": false
         }
       ],
@@ -15,11 +15,11 @@
       "UUID": "cz.danol.discordmixer.openmixer"
     },
     {
-      "Icon": "icons/icons8_arrow_up_48px",
+      "Icon": "icons/icons8_arrow_up_72px",
       "Name": "[DVM] Back",
       "States": [
         {
-          "Image": "icons/icons8_arrow_up_48px",
+          "Image": "icons/icons8_arrow_up_72px",
           "ShowTitle": false
         }
       ],
@@ -27,7 +27,7 @@
       "UUID": "cz.danol.discordmixer.back"
     },
     {
-      "Icon": "icons/icons8_user_48px",
+      "Icon": "icons/icons8_user_72px",
       "Name": "[DVM] Indexed user",
       "States": [
         {
@@ -45,16 +45,28 @@
           "FontSize": "8"
         }
       ],
+      "Controllers": [
+        "Keypad",
+        "Encoder"
+      ],
+      "Encoder": {
+        "layout": "$B1",
+        "TriggerDescription": {
+          "Rotate": "Change user volume",
+          "Push": "Mute/unmute the user"
+        }
+      },
+      "UserTitleEnabled": false,
       "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
-      "Tooltip": "User button",
+      "Tooltip": "Shows user avatar, status, volume. Pressing it mutes the user.",
       "UUID": "cz.danol.discordmixer.user"
     },
     {
-      "Icon": "icons/icons8_plus_math_48px",
+      "Icon": "icons/icons8_plus_math_72px",
       "Name": "[DVM] Indexed user volume up",
       "States": [
         {
-          "Image": "icons/icons8_plus_math_48px",
+          "Image": "icons/icons8_plus_math_72px",
           "ShowTitle": false
         },
         {
@@ -67,11 +79,11 @@
       "UUID": "cz.danol.discordmixer.volumeup"
     },
     {
-      "Icon": "icons/icons8_minus_48px",
+      "Icon": "icons/icons8_minus_72px",
       "Name": "[DVM] Indexed user volume down",
       "States": [
         {
-          "Image": "icons/icons8_minus_48px",
+          "Image": "icons/icons8_minus_72px",
           "ShowTitle": false
         },
         {
@@ -84,11 +96,11 @@
       "UUID": "cz.danol.discordmixer.volumedown"
     },
     {
-      "Icon": "icons/icons8_sort_right_48px",
+      "Icon": "icons/icons8_sort_right_72px",
       "Name": "[DVM] Next page",
       "States": [
         {
-          "Image": "icons/icons8_sort_right_48px",
+          "Image": "icons/icons8_sort_right_72px",
           "ShowTitle": true,
           "TitleAlignment": "top",
           "FontFamily": "Verdana",
@@ -102,16 +114,17 @@
           "FontSize": "8"
         }
       ],
-      "Tooltip": "Go to next page",
+      "UserTitleEnabled": false,
+      "Tooltip": "Next page",
       "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "UUID": "cz.danol.discordmixer.nextpage"
     },
     {
-      "Icon": "icons/icons8_sort_left_48px",
+      "Icon": "icons/icons8_sort_left_72px",
       "Name": "[DVM] Previous page",
       "States": [
         {
-          "Image": "icons/icons8_sort_left_48px",
+          "Image": "icons/icons8_sort_left_72px",
           "ShowTitle": true,
           "TitleAlignment": "top",
           "FontFamily": "Verdana",
@@ -125,20 +138,21 @@
           "FontSize": "8"
         }
       ],
-      "Tooltip": "Goto previous page",
+      "UserTitleEnabled": false,
+      "Tooltip": "Previous page",
       "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
       "UUID": "cz.danol.discordmixer.previouspage"
     },
     {
-      "Icon": "icons/icons8_block_microphone_48px",
+      "Icon": "icons/icons8_block_microphone_72px",
       "Name": "[DVM] Mute/unmute microphone",
       "States": [
         {
-          "Image": "icons/icons8_microphone_48px",
+          "Image": "icons/icons8_microphone_72px",
           "ShowTitle": false
         },
         {
-          "Image": "icons/icons8_block_microphone_48px",
+          "Image": "icons/icons8_block_microphone_72px",
           "ShowTitle": false
         }
       ],
@@ -147,15 +161,15 @@
       "UUID": "cz.danol.discordmixer.microphone"
     },
     {
-      "Icon": "icons/icons8_no_audio_48px",
+      "Icon": "icons/icons8_no_audio_72px",
       "Name": "[DVM] Mute/unmute audio (deafen)",
       "States": [
         {
-          "Image": "icons/icons8_speaker_48px",
+          "Image": "icons/icons8_speaker_72px",
           "ShowTitle": false
         },
         {
-          "Image": "icons/icons8_no_audio_48px",
+          "Image": "icons/icons8_no_audio_72px",
           "ShowTitle": false
         }
       ],
@@ -169,35 +183,31 @@
   "CodePathWin": "bin/streamdeck-discordmixer.exe",
   "Description": "Provides a mixer for Discord voice chat that allows adjusting volume for individual users.\nThis application uses Icons8 icons (https://icons8.com)",
   "Category": "Discord Volume Mixer",
-  "CategoryIcon": "icons/icons8_discord_new_48px",
+  "CategoryIcon": "icons/icons8_discord_new_72px",
   "Name": "Discord Volume Mixer",
-  "Icon": "icons/icons8_discord_new_48px",
+  "Icon": "icons/icons8_discord_new_72px",
   "URL": "https://www.github.com/CZDanol/streamdeck-discordmixer",
   "Version": "2.0.0.0",
   "Profiles": [
     {
       "Name": "Discord Volume Mixer",
       "DeviceType": 0,
-      "ReadOnly": false,
-      "DontAutoSwitchWhenInstalled": true
+      "ReadOnly": false
     },
     {
       "Name": "Discord Volume Mixer",
       "DeviceType": 3,
-      "ReadOnly": false,
-      "DontAutoSwitchWhenInstalled": true
+      "ReadOnly": false
     },
     {
       "Name": "Discord Volume Mixer XL",
       "DeviceType": 2,
-      "ReadOnly": false,
-      "DontAutoSwitchWhenInstalled": true
+      "ReadOnly": false
     },
     {
       "Name": "Discord Volume Mixer Mini",
       "DeviceType": 1,
-      "ReadOnly": false,
-      "DontAutoSwitchWhenInstalled": true
+      "ReadOnly": false
     }
   ],
   "OS": [
@@ -207,6 +217,6 @@
     }
   ],
   "Software": {
-    "MinimumVersion": "4.1"
+    "MinimumVersion": "5"
   }
 }

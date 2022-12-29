@@ -44,6 +44,9 @@ signals:
 	/// Updates text & states of all user related buttons
 	void buttonsUpdateRequested();
 
+private:
+	void updateCurrentVoiceChannel(const QString &newVoiceChannel);
+
 private slots:
 	void onInitialized();
 	void onDiscordMessageReceived(const QDiscordMessage &msg);

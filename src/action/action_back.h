@@ -2,11 +2,10 @@
 
 #include "dvmaction.h"
 
-class Action_OpenMixer : public DVMAction {
-Q_OBJECT
+class Action_Back : public DVMAction {
 
 public:
-	Action_OpenMixer();
+	Action_Back();
 
 private slots:
 	void onPressed();

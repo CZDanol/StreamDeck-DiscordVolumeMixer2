@@ -15,9 +15,12 @@ protected:
 	virtual void buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) override;
 
 private slots:
-	void onClicked();
+	void onInitialized();
+	void onPressed();
+	void onReleased();
 
 private:
+	bool isEncoder_ = false;
 	QString title_;
 	QString userID_;
 	bool hasAvatar_ = false;

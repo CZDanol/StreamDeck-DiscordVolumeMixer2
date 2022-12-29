@@ -7,7 +7,9 @@
 #include "dvmplugin.h"
 
 Action_IndexedVCMInfo::Action_IndexedVCMInfo() {
-	connect(this, &QStreamDeckAction::keyDown, this, &Action_IndexedVCMInfo::onClicked);
+	connect(this, &QStreamDeckAction::initialized, this, &Action_IndexedVCMInfo::onInitialized);
+	connect(this, &QStreamDeckAction::keyDown, this, &Action_IndexedVCMInfo::onPressed);
+	connect(this, &QStreamDeckAction::keyUp, this, &Action_IndexedVCMInfo::onReleased);
 }
 
 void Action_IndexedVCMInfo::update() {
@@ -58,7 +60,7 @@ void Action_IndexedVCMInfo::update() {
 	}
 }
 
-void Action_IndexedVCMInfo::onClicked() {
+void Action_IndexedVCMInfo::onPressed() {
 	VoiceChannelMember &vcm = voiceChannelMember();
 	if(!vcm.isValid)
 		return;
@@ -67,9 +69,14 @@ void Action_IndexedVCMInfo::onClicked() {
 
 	plugin()->discord.sendCommand(+QDiscord::CommandType::setUserVoiceSettings, QJsonObject{
 		{"user_id", vcm.userID},
-		{"mute", vcm.isMuted},
+		{"mute",    vcm.isMuted},
 	});
 	emit plugin()->buttonsUpdateRequested();
+}
+
+void Action_IndexedVCMInfo::onReleased() {
+	// Force state update (because pressing switches it)
+	setState(state_);
 }
 
 void Action_IndexedVCMInfo::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {

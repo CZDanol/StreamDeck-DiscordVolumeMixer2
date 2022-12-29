@@ -3,10 +3,10 @@
 #include "dvmplugin.h"
 
 Action_OpenMixer::Action_OpenMixer() {
-	connect(this, &QStreamDeckAction::keyDown, this, &Action_OpenMixer::onKeyDown);
+	connect(this, &QStreamDeckAction::keyDown, this, &Action_OpenMixer::onPressed);
 }
 
-void Action_OpenMixer::onKeyDown() {
+void Action_OpenMixer::onPressed() {
 	using DT = QStreamDeckDevice::DeviceType;
 	static const QMap<int, QString> profileNameByDeviceType{
 		{+DT::streamDeck,       "Discord Volume Mixer"},

@@ -15,14 +15,18 @@ Action_VCMPaging::~Action_VCMPaging() {
 }
 
 auto computeParams(Action_VCMPaging &b) {
-	const int step = b.setting("step").toInt();
-	const int pageCount = static_cast<int>(b.plugin()->voiceChannelMembers.size() + step - 1) / step;
-
 	struct R {
-		int pageCount;
-		int currentPage;
-		int maxOffset;
+		int pageCount = 0;
+		int currentPage = 0;
+		int maxOffset = 0;
 	};
+
+	qDebug() << b.settings();
+	const int step = b.setting("step").toInt();
+	if(!step)
+		return R{};
+
+	const int pageCount = static_cast<int>(b.plugin()->voiceChannelMembers.size() + step - 1) / step;
 	return R{
 		.pageCount = pageCount,
 		.currentPage = b.device()->voiceChannelMemberIndexOffset / step,
@@ -59,6 +63,10 @@ void Action_VCMPaging::buildPropertyInspector(QStreamDeckPropertyInspectorBuilde
 
 void Action_VCMPaging::onInitialized() {
 	setSettingDefault("step", 1);
+
+	// For backward compatibility reasons
+	if(const auto v = setting("step"); v.isString())
+		setSetting("step", v.toString().toInt());
 
 	isBackButton_ = (actionUID() == "cz.danol.discordmixer.previousPage");
 	(isBackButton_ ? device()->vcmPrevPageButtonCount : device()->vcmNextPageButtonCount)++;
