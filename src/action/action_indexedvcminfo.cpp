@@ -111,9 +111,11 @@ void Action_IndexedVCMInfo::update_encoder() {
 		QPainter p(&img);
 		img.fill(Qt::transparent);
 		if(hasAvatar_) {
-			p.setOpacity(0.5);
-			p.drawImage(0, 0, avatar.scaled(72, 72, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-			p.setOpacity(1);
+			p.drawImage(0, 0, avatar.scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		}
+		else if(vcm.isValid) {
+			static const QImage avatarPlaceholder = QImage("icons/icons8_user_72px.png").scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+			p.drawImage(0, 0, avatarPlaceholder);
 		}
 
 		feedbackData.insert("icon", QStreamDeckPlugin::encodeImage(img));
