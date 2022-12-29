@@ -14,6 +14,9 @@ public slots:
 protected:
 	virtual void buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) override;
 
+private slots:
+	void onInitialized();
+
 private:
 	QString title_;
 	QString userID_;

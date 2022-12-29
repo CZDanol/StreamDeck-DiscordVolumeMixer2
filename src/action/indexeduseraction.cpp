@@ -12,6 +12,11 @@ IndexedUserAction::IndexedUserAction() {
 
 void IndexedUserAction::onInitialized() {
 	connect(plugin(), &DVMPlugin::buttonsUpdateRequested, this, &IndexedUserAction::update);
+
+	// Convert from string to int (legacy reasons)
+	if(const auto v = setting("user_ix"); v.isString())
+		setSetting("user_ix", v.toString().toInt());
+
 	update();
 }
 
@@ -20,11 +25,11 @@ int IndexedUserAction::voiceChannelMemberIndex() {
 }
 
 VoiceChannelMember IndexedUserAction::voiceChannelMember() {
-	return plugin()->voiceChannelMembers.value(plugin()->voiceChannelMembers.keys().value(voiceChannelMemberIndex()));
+	const int ix = voiceChannelMemberIndex();
+	return plugin()->voiceChannelMembers.value(plugin()->voiceChannelMembers.keys().value(ix));
 }
 
 void IndexedUserAction::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
-	b.addSection("Indexed user action");
 	b.addSpinBox("user_ix", "User index").linkWithActionSetting();
 	b.addMessage("Index in the channel users list, indexed from 0.");
 

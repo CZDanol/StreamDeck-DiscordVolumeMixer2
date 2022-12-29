@@ -25,10 +25,17 @@ void DVMPlugin::connectToDiscord() {
 	if(discord.isConnected())
 		return;
 
-	discord.connect(globalSetting("client_id").toString(), globalSetting("client_secret").toString());
+	if(discord.connect(globalSetting("client_id").toString(), globalSetting("client_secret").toString())) {
 
-	// Update buttons regardless whether the connection was successfull or not
-	emit buttonsUpdateRequested();
+		// Subscribe to voice channel select event
+		discord.sendCommand(+QDiscord::CommandType::subscribe, {}, QJsonObject{
+			{"evt", "VOICE_CHANNEL_SELECT"}
+		});
+
+		updateChannelMembersData();
+	}
+	else
+		emit buttonsUpdateRequested();
 }
 
 void DVMPlugin::updateChannelMembersData() {
@@ -127,11 +134,11 @@ void DVMPlugin::onDiscordMessageReceived(const QDiscordMessage &msg) {
 		}
 
 		case ET::speakingStart:
-			speakingUsers.insert(msg.json["data"]["user_id"].toString());
+			speakingVoiceChannelMembers.insert(msg.json["data"]["user_id"].toString());
 			break;
 
 		case ET::speakingStop:
-			speakingUsers.remove(msg.json["data"]["user_id"].toString());
+			speakingVoiceChannelMembers.remove(msg.json["data"]["user_id"].toString());
 			break;
 
 		default:
