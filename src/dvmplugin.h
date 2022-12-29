@@ -6,6 +6,7 @@
 
 #include "declares.h"
 #include "voicechannelmember.h"
+#include "dvmdevice.h"
 
 class DVMPlugin : public QStreamDeckPluginT<DVMDevice> {
 Q_OBJECT
