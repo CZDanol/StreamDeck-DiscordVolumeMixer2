@@ -4,9 +4,6 @@
 
 #include "dvmplugin.h"
 
-static constexpr float minVolume = 0;
-static constexpr float maxVolume = 200;
-
 Action_IndexedVCMVolume::Action_IndexedVCMVolume() {
 	connect(this, &QStreamDeckAction::initialized, this, &Action_IndexedVCMVolume::onInitialized);
 	connect(this, &QStreamDeckAction::keyDown, this, &Action_IndexedVCMVolume::onPressed);
@@ -22,7 +19,7 @@ Action_IndexedVCMVolume::Action_IndexedVCMVolume() {
 void Action_IndexedVCMVolume::update() {
 	VoiceChannelMember &vcm = voiceChannelMember();
 
-	const int targetState = int(!vcm.isValid || (isVolumeDown_ ? vcm.volume <= minVolume : vcm.volume >= maxVolume));
+	const int targetState = int(!vcm.isValid || (isVolumeDown_ ? vcm.volume <= QDiscord::minVoiceVolume : vcm.volume >= QDiscord::maxVoiceVolume));
 	if(state_ != targetState) {
 		state_ = targetState;
 		setState(state_);
@@ -59,19 +56,7 @@ void Action_IndexedVCMVolume::trigger() {
 	if(!vcm.isValid)
 		return;
 
-	const float step = plugin()->globalSetting("voiceChannelVolumeButtonStep").toInt() * (isVolumeDown_ ? -1 : 1);
-	const float newVolume = qRound(qBound(minVolume, vcm.volume + step, maxVolume) / step) * step;
-
-	if(newVolume != vcm.volume || vcm.isMuted) {
-		vcm.volume = newVolume;
-		vcm.isMuted = false;
-		state_ = -1;
-
-		plugin()->discord.sendCommand(+QDiscord::CommandType::setUserVoiceSettings, QJsonObject{
-			{"user_id", vcm.userID},
-			{"volume",  QDiscord::uiToIPCVolume(newVolume)},
-			{"mute",    false},
-		});
-		emit plugin()->buttonsUpdateRequested();
-	}
+	const int stepSize = plugin()->globalSetting("voiceChannelVolumeButtonStep").toInt();
+	const int numSteps = isVolumeDown_ ? -1 : 1;
+	plugin()->adjustVoiceChannelMemberVolume(vcm, stepSize, numSteps);
 }

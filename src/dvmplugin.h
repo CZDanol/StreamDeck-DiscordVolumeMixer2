@@ -26,6 +26,8 @@ public:
 	/// Processes voice state update for the user itself
 	void updateSelfVoiceState(const QDiscordMessage &msg);
 
+	void adjustVoiceChannelMemberVolume(VoiceChannelMember &vcm, float stepSize, int numSteps);
+
 public:
 	QDiscord discord;
 

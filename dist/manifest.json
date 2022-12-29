@@ -50,7 +50,6 @@
         "Encoder"
       ],
       "Encoder": {
-        "layout": "$B1",
         "TriggerDescription": {
           "Rotate": "Change user volume",
           "Push": "Mute/unmute the user"
@@ -186,7 +185,7 @@
   "CategoryIcon": "icons/icons8_discord_new_72px",
   "Name": "Discord Volume Mixer",
   "Icon": "icons/icons8_discord_new_72px",
-  "URL": "https://www.github.com/CZDanol/streamdeck-discordmixer",
+  "URL": "https://github.com/CZDanol/StreamDeck-DiscordVolumeMixer2",
   "Version": "2.0.0.0",
   "Profiles": [
     {
@@ -207,6 +206,11 @@
     {
       "Name": "Discord Volume Mixer Mini",
       "DeviceType": 1,
+      "ReadOnly": false
+    },
+    {
+      "Name": "Discord Volume Mixer+",
+      "DeviceType": 7,
       "ReadOnly": false
     }
   ],

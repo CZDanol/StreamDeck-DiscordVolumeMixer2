@@ -93,6 +93,25 @@ void DVMPlugin::updateSelfVoiceState(const QDiscordMessage &msg) {
 		isDeafened = v.toBool();
 }
 
+void DVMPlugin::adjustVoiceChannelMemberVolume(VoiceChannelMember &vcm, float stepSize, int numSteps) {
+	const float step = globalSetting("voiceChannelVolumeButtonStep").toInt();
+	float newVolume = vcm.volume + stepSize * numSteps;
+	newVolume = qBound(QDiscord::minVoiceVolume, newVolume, QDiscord::maxVoiceVolume);
+	newVolume = qRound(newVolume / stepSize) * stepSize;
+
+	if(newVolume != vcm.volume || vcm.isMuted) {
+		vcm.volume = newVolume;
+		vcm.isMuted = false;
+
+		discord.sendCommand(+QDiscord::CommandType::setUserVoiceSettings, QJsonObject{
+			{"user_id", vcm.userID},
+			{"volume",  QDiscord::uiToIPCVolume(newVolume)},
+			{"mute",    false},
+		});
+		emit buttonsUpdateRequested();
+	}
+}
+
 void DVMPlugin::updateCurrentVoiceChannel(const QString &newVoiceChannel) {
 	// If the channel changed, update event subscribtions
 	if(newVoiceChannel == currentVoiceChannelID)
@@ -181,6 +200,7 @@ void DVMPlugin::onDiscordMessageReceived(const QDiscordMessage &msg) {
 
 void DVMPlugin::onInitialized() {
 	setGlobalSettingDefault("voiceChannelVolumeButtonStep", 5);
+	setGlobalSettingDefault("voiceChannelVolumeEncoderStep", 5);
 
 	connectToDiscord();
 }

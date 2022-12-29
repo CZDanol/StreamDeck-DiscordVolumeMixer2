@@ -14,16 +14,24 @@ public slots:
 protected:
 	virtual void buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) override;
 
+private:
+	void update_button();
+	void update_encoder();
+
 private slots:
-	void onInitialized();
 	void onPressed();
 	void onReleased();
+	void onRotated(int delta);
 
 private:
-	bool isEncoder_ = false;
 	QString title_;
 	QString userID_;
 	bool hasAvatar_ = false;
 	int state_ = -1;
+
+private:
+	QString feedbackLayout_;
+	int indicatorValue_ = -1;
+	QString feedbackValue_;
 
 };
