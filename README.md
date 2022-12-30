@@ -50,7 +50,7 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 * [Icons8 icons](https://icons8.com/)
 
 ### Credits
-* Big cudos to [Krabs](https://github.com/krabs-github) for helping me out with profiles for the XL version and testing and overall being awesome.
+* Big kudos to [Krabs](https://github.com/krabs-github) for helping me out with profiles for the XL version and testing and overall being awesome.
 
 ## TODO
 * Self status button
