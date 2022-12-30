@@ -12,6 +12,7 @@ Action_IndexedVCMInfo::Action_IndexedVCMInfo() {
 
 	connect(this, &QStreamDeckAction::dialPressed, this, &Action_IndexedVCMInfo::onPressed);
 	connect(this, &QStreamDeckAction::dialRotated, this, &Action_IndexedVCMInfo::onRotated);
+	connect(this, &QStreamDeckAction::touchTap, this, &Action_IndexedVCMInfo::onPressed);
 }
 
 void Action_IndexedVCMInfo::update() {
