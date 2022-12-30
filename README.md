@@ -45,7 +45,7 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 
 ## Third-party libraries, credits
 * Qt 6 (tested on Qt 6.2.1 MSVC 2019 Win x64)
-* [QtStreamDeck](https://github.com/CZDanol/QtStreamDeck) for Stream Deck control (copy of [alexandarZ / ElgatoStreamDeck-QtPluginBase](https://github.com/alexandarZ/ElgatoStreamDeck-QtPluginBase), but I adjusted some stuff).
+* [QtStreamDeck2](https://github.com/CZDanol/QtStreamDeck2) for Stream Deck control.
 * [QtDiscordIPC](https://github.com/CZDanol/QtDiscordIPC/) for Discord control (IPC through QLocalSocket).
 * [Icons8 icons](https://icons8.com/)
 
