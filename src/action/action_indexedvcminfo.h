@@ -24,14 +24,14 @@ private slots:
 	void onRotated(int delta);
 
 private:
-	QString title_;
+	QString title_ = "###";
 	QString userID_;
 	bool hasAvatar_ = false;
 	int state_ = -1;
 
 private:
-	QString feedbackLayout_;
+	QString feedbackLayout_ = "###";
 	int indicatorValue_ = -1;
-	QString feedbackValue_;
+	QString feedbackValue_ = "###";
 
 };
