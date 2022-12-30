@@ -1,4 +1,6 @@
 # Stream Deck Discord Volume Mixer
+**Version 2 is not yet officially released on the marketplace (it's in the testing phase for now). You can however download it manually from the releases section in this repository.**
+
 This is a plugin for Stream Deck for managing Discord Voice chats:
 * Shows list of people in your voice chat.
 * You can **adjust volume** for each user.
