@@ -53,7 +53,7 @@
         "TriggerDescription": {
           "Rotate": "Change user volume",
           "Push": "Mute/unmute the user",
-          "Touch": "Mute/unmute the user",
+          "Touch": "Mute/unmute the user"
         }
       },
       "UserTitleEnabled": false,
