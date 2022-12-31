@@ -1,5 +1,3 @@
-- Specific user controls instead of indexed
-
 - Encoder - press to cycle through users
 - Encoder - press to toggle to cycle mode, press again to toggle to volume mode
 - page dial
