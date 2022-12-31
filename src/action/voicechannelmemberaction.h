@@ -3,13 +3,12 @@
 #include "dvmaction.h"
 #include "voicechannelmember.h"
 
-class IndexedVCMAction : public DVMAction {
+class VoiceChannelMemberAction : public DVMAction {
 
 public:
-	IndexedVCMAction();
+	VoiceChannelMemberAction();
 
 public:
-	int voiceChannelMemberIndex();
 	VoiceChannelMember &voiceChannelMember();
 
 protected:

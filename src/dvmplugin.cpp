@@ -3,8 +3,8 @@
 #include "dvmdevice.h"
 
 #include "action/action_openmixer.h"
-#include "action/action_indexedvcminfo.h"
-#include "action/action_indexedvcmvolume.h"
+#include "action/action_vcminfo.h"
+#include "action/action_vcmvolume.h"
 #include "action/action_vcmpaging.h"
 #include "action/action_back.h"
 #include "action/action_deafen.h"
@@ -12,9 +12,9 @@
 
 DVMPlugin::DVMPlugin() {
 	registerActionType<Action_OpenMixer>("cz.danol.discordmixer.openmixer");
-	registerActionType<Action_IndexedVCMInfo>("cz.danol.discordmixer.user");
-	registerActionType<Action_IndexedVCMVolume>("cz.danol.discordmixer.volumeup");
-	registerActionType<Action_IndexedVCMVolume>("cz.danol.discordmixer.volumedown");
+	registerActionType<Action_VCMInfo>("cz.danol.discordmixer.user");
+	registerActionType<Action_VCMVolume>("cz.danol.discordmixer.volumeup");
+	registerActionType<Action_VCMVolume>("cz.danol.discordmixer.volumedown");
 	registerActionType<Action_VCMPaging>("cz.danol.discordmixer.nextpage");
 	registerActionType<Action_VCMPaging>("cz.danol.discordmixer.previouspage");
 	registerActionType<Action_Back>("cz.danol.discordmixer.back");

@@ -1,12 +1,12 @@
 #pragma once
 
-#include "indexedvcmaction.h"
+#include "voicechannelmemberaction.h"
 
-class Action_IndexedVCMInfo : public IndexedVCMAction {
+class Action_VCMInfo : public VoiceChannelMemberAction {
 Q_OBJECT
 
 public:
-	Action_IndexedVCMInfo();
+	Action_VCMInfo();
 
 public slots:
 	virtual void update() override;

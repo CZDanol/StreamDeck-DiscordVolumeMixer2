@@ -28,7 +28,7 @@
     },
     {
       "Icon": "icons/icons8_user_72px",
-      "Name": "[DVM] Indexed user",
+      "Name": "[DVM] Voice channel member",
       "States": [
         {
           "Image": "icons/noicon",
@@ -52,7 +52,8 @@
       "Encoder": {
         "TriggerDescription": {
           "Rotate": "Change user volume",
-          "Push": "Mute/unmute the user"
+          "Push": "Mute/unmute the user",
+          "Touch": "Mute/unmute the user",
         }
       },
       "UserTitleEnabled": false,
@@ -62,7 +63,7 @@
     },
     {
       "Icon": "icons/icons8_plus_math_72px",
-      "Name": "[DVM] Indexed user volume up",
+      "Name": "[DVM] Voice channel member volume up",
       "States": [
         {
           "Image": "icons/icons8_plus_math_72px",
@@ -79,7 +80,7 @@
     },
     {
       "Icon": "icons/icons8_minus_72px",
-      "Name": "[DVM] Indexed user volume down",
+      "Name": "[DVM] Voice channel member volume down",
       "States": [
         {
           "Image": "icons/icons8_minus_72px",

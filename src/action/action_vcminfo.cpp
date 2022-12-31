@@ -1,4 +1,4 @@
-#include "action_indexedvcminfo.h"
+#include "action_vcminfo.h"
 
 #include <QPainter>
 
@@ -6,23 +6,23 @@
 
 #include "dvmplugin.h"
 
-Action_IndexedVCMInfo::Action_IndexedVCMInfo() {
-	connect(this, &QStreamDeckAction::keyDown, this, &Action_IndexedVCMInfo::onPressed);
-	connect(this, &QStreamDeckAction::keyUp, this, &Action_IndexedVCMInfo::onReleased);
+Action_VCMInfo::Action_VCMInfo() {
+	connect(this, &QStreamDeckAction::keyDown, this, &Action_VCMInfo::onPressed);
+	connect(this, &QStreamDeckAction::keyUp, this, &Action_VCMInfo::onReleased);
 
-	connect(this, &QStreamDeckAction::dialPressed, this, &Action_IndexedVCMInfo::onPressed);
-	connect(this, &QStreamDeckAction::dialRotated, this, &Action_IndexedVCMInfo::onRotated);
-	connect(this, &QStreamDeckAction::touchTap, this, &Action_IndexedVCMInfo::onPressed);
+	connect(this, &QStreamDeckAction::dialPressed, this, &Action_VCMInfo::onPressed);
+	connect(this, &QStreamDeckAction::dialRotated, this, &Action_VCMInfo::onRotated);
+	connect(this, &QStreamDeckAction::touchTap, this, &Action_VCMInfo::onPressed);
 }
 
-void Action_IndexedVCMInfo::update() {
+void Action_VCMInfo::update() {
 	if(controller() == Controller::keypad)
 		update_button();
 	else
 		update_encoder();
 }
 
-void Action_IndexedVCMInfo::update_button() {
+void Action_VCMInfo::update_button() {
 	const VoiceChannelMember &vcm = voiceChannelMember();
 	const bool isSpeaking = vcm.isValid && plugin()->speakingVoiceChannelMembers.contains(vcm.userID);
 
@@ -72,7 +72,7 @@ void Action_IndexedVCMInfo::update_button() {
 	}
 }
 
-void Action_IndexedVCMInfo::update_encoder() {
+void Action_VCMInfo::update_encoder() {
 	const VoiceChannelMember &vcm = voiceChannelMember();
 	const bool isSpeaking = vcm.isValid && plugin()->speakingVoiceChannelMembers.contains(vcm.userID);
 
@@ -147,7 +147,7 @@ void Action_IndexedVCMInfo::update_encoder() {
 	setFeedback(feedbackData);
 }
 
-void Action_IndexedVCMInfo::onPressed() {
+void Action_VCMInfo::onPressed() {
 	VoiceChannelMember &vcm = voiceChannelMember();
 	if(!vcm.isValid)
 		return;
@@ -161,12 +161,12 @@ void Action_IndexedVCMInfo::onPressed() {
 	emit plugin()->buttonsUpdateRequested();
 }
 
-void Action_IndexedVCMInfo::onReleased() {
+void Action_VCMInfo::onReleased() {
 	// Force state update (because pressing switches it)
 	setState(state_);
 }
 
-void Action_IndexedVCMInfo::onRotated(int delta) {
+void Action_VCMInfo::onRotated(int delta) {
 	VoiceChannelMember &vcm = voiceChannelMember();
 	if(!vcm.isValid)
 		return;
@@ -175,7 +175,7 @@ void Action_IndexedVCMInfo::onRotated(int delta) {
 	plugin()->adjustVoiceChannelMemberVolume(vcm, stepSize, delta);
 }
 
-void Action_IndexedVCMInfo::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
+void Action_VCMInfo::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
 	b.addCheckBox("hideNobodyInVoiceChatText", "Hide NIVC", "Hide 'Nobody in voice chat' text (global)").linkWithGlobalSetting();
 
 	if(controller() == Controller::encoder) {
@@ -183,5 +183,5 @@ void Action_IndexedVCMInfo::buildPropertyInspector(QStreamDeckPropertyInspectorB
 		b.addMessage("Volume step is global for all volume encoders.");
 	}
 
-	IndexedVCMAction::buildPropertyInspector(b);
+	VoiceChannelMemberAction::buildPropertyInspector(b);
 }

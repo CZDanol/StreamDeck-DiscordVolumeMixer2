@@ -2,12 +2,12 @@
 
 #include <QTimer>
 
-#include "indexedvcmaction.h"
+#include "voicechannelmemberaction.h"
 
-class Action_IndexedVCMVolume : public IndexedVCMAction {
+class Action_VCMVolume : public VoiceChannelMemberAction {
 
 public:
-	Action_IndexedVCMVolume();
+	Action_VCMVolume();
 
 public:
 	virtual void update() override;
