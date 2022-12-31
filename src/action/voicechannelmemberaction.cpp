@@ -15,7 +15,7 @@ void VoiceChannelMemberAction::onInitialized() {
 		setSetting("user_ix", QString::number(v.toInt()));
 }
 
-VoiceChannelMember &VoiceChannelMemberAction::voiceChannelMember() {
+VoiceChannelMember *VoiceChannelMemberAction::voiceChannelMember() {
 	auto &lst = plugin()->voiceChannelMembers;
 
 	QString userID = setting("user_ix").toString();
@@ -25,15 +25,13 @@ VoiceChannelMember &VoiceChannelMemberAction::voiceChannelMember() {
 		userID = lst.keys().value(userID.toInt() + device()->voiceChannelMemberIndexOffset);
 
 	auto it = lst.find(userID);
-
-	static VoiceChannelMember invalidMember;
-	return it != lst.end() ? *it : invalidMember;
+	return it != lst.end() ? &*it : nullptr;
 }
 
 void VoiceChannelMemberAction::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
-	b.addSpinBox("user_ix", "User index or ID").linkWithActionSetting();
+	b.addLineEdit("user_ix", "User index or ID").linkWithActionSetting();
 	b.addMessage("Index in the channel users list, indexed from 0.");
-	b.addMessage("Alternatively, you can also use User ID (right click user -> copy ID> to set it to a specific user.");
+	b.addMessage("Alternatively, you can also use User ID (right click user -> copy ID) to set it to a specific user.");
 
 	DVMAction::buildPropertyInspector(b);
 }

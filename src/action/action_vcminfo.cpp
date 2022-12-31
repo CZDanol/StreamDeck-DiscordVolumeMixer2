@@ -23,8 +23,10 @@ void Action_VCMInfo::update() {
 }
 
 void Action_VCMInfo::update_button() {
-	const VoiceChannelMember &vcm = voiceChannelMember();
-	const bool isSpeaking = vcm.isValid && plugin()->speakingVoiceChannelMembers.contains(vcm.userID);
+	const VoiceChannelMember *vcmp = voiceChannelMember();
+	const VoiceChannelMember& vcm = vcmp ? *vcmp : VoiceChannelMember::null;
+
+	const bool isSpeaking = vcmp && plugin()->speakingVoiceChannelMembers.contains(vcm.userID);
 
 	const QString volumeStr = vcm.isMuted ? "MUTED" : QStringLiteral("%1 %").arg(QString::number(vcm.volume));
 
@@ -32,7 +34,7 @@ void Action_VCMInfo::update_button() {
 		QString newTitle;
 		if(!plugin()->discord.isConnected())
 			newTitle = plugin()->discord.connectionError();
-		else if(vcm.isValid)
+		else if(vcmp)
 			newTitle = QStringLiteral("%1\n%3\n%2").arg(vcm.nick, volumeStr, isSpeaking ? ">>SPEAKING<<" : vcm.isMuted ? "##" : "");
 		else if(plugin()->voiceChannelMembers.isEmpty() && !plugin()->globalSetting("hideNobodyInVoiceChatText").toBool())
 			newTitle = QString("NOBODY\nIN\nVOICE CHAT");
@@ -73,8 +75,10 @@ void Action_VCMInfo::update_button() {
 }
 
 void Action_VCMInfo::update_encoder() {
-	const VoiceChannelMember &vcm = voiceChannelMember();
-	const bool isSpeaking = vcm.isValid && plugin()->speakingVoiceChannelMembers.contains(vcm.userID);
+	const VoiceChannelMember *vcmp = voiceChannelMember();
+	const VoiceChannelMember& vcm = vcmp ? *vcmp : VoiceChannelMember::null;
+
+	const bool isSpeaking = vcmp && plugin()->speakingVoiceChannelMembers.contains(vcm.userID);
 
 	QJsonObject feedbackData;
 
@@ -82,7 +86,7 @@ void Action_VCMInfo::update_encoder() {
 		QString newTitle;
 		if(!plugin()->discord.isConnected())
 			newTitle = plugin()->discord.connectionError();
-		else if(vcm.isValid)
+		else if(vcmp)
 			newTitle = vcm.nick;
 		else if(plugin()->voiceChannelMembers.isEmpty() && !plugin()->globalSetting("hideNobodyInVoiceChatText").toBool())
 			newTitle = QString("NOBODY IN VOICE");
@@ -94,7 +98,7 @@ void Action_VCMInfo::update_encoder() {
 	}
 
 	{
-		const QString newLayout = vcm.isValid ? "$B1" : "$X1";
+		const QString newLayout = vcmp ? "$B1" : "$X1";
 		if(feedbackLayout_ != newLayout) {
 			feedbackLayout_ = newLayout;
 			setFeedbackLayout(newLayout);
@@ -114,7 +118,7 @@ void Action_VCMInfo::update_encoder() {
 		if(hasAvatar_) {
 			p.drawImage(0, 0, avatar.scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 		}
-		else if(vcm.isValid) {
+		else if(vcmp) {
 			static const QImage avatarPlaceholder = QImage("icons/icons8_user_72px.png").scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 			p.drawImage(0, 0, avatarPlaceholder);
 		}
@@ -132,7 +136,7 @@ void Action_VCMInfo::update_encoder() {
 		QString newValue;
 		if(vcm.isMuted)
 			newValue = "MUTED";
-		else if(vcm.isValid) {
+		else if(vcmp) {
 			newValue = QStringLiteral("%1 %").arg(qRound(vcm.volume));
 			if(isSpeaking)
 				newValue = QStringLiteral("\U0001F3A4 ") + newValue;
@@ -148,15 +152,15 @@ void Action_VCMInfo::update_encoder() {
 }
 
 void Action_VCMInfo::onPressed() {
-	VoiceChannelMember &vcm = voiceChannelMember();
-	if(!vcm.isValid)
+	VoiceChannelMember *vcm = voiceChannelMember();
+	if(!vcm)
 		return;
 
-	vcm.isMuted ^= true;
+	vcm->isMuted ^= true;
 
 	plugin()->discord.sendCommand(+QDiscord::CommandType::setUserVoiceSettings, QJsonObject{
-		{"user_id", vcm.userID},
-		{"mute",    vcm.isMuted},
+		{"user_id", vcm->userID},
+		{"mute",    vcm->isMuted},
 	});
 	emit plugin()->buttonsUpdateRequested();
 }
@@ -167,12 +171,12 @@ void Action_VCMInfo::onReleased() {
 }
 
 void Action_VCMInfo::onRotated(int delta) {
-	VoiceChannelMember &vcm = voiceChannelMember();
-	if(!vcm.isValid)
+	VoiceChannelMember *vcm = voiceChannelMember();
+	if(!vcm)
 		return;
 
 	const int stepSize = plugin()->globalSetting("voiceChannelVolumeEncoderStep").toInt();
-	plugin()->adjustVoiceChannelMemberVolume(vcm, stepSize, delta);
+	plugin()->adjustVoiceChannelMemberVolume(*vcm, stepSize, delta);
 }
 
 void Action_VCMInfo::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {

@@ -2,6 +2,8 @@
 
 #include <qtdiscordipc/qdiscord.h>
 
+const VoiceChannelMember VoiceChannelMember::null;
+
 VoiceChannelMember VoiceChannelMember::fromJson(const QJsonObject &json) {
 	return VoiceChannelMember{
 		.nick = json["nick"].toString(),
@@ -9,6 +11,5 @@ VoiceChannelMember VoiceChannelMember::fromJson(const QJsonObject &json) {
 		.avatarID = json["user"]["avatar"].toString(),
 		.volume = float(qRound(QDiscord::ipcToUIVolume(json["volume"].toDouble()))),
 		.isMuted = json["mute"].toBool(),
-		.isValid = true,
 	};
 }

@@ -17,9 +17,10 @@ Action_VCMVolume::Action_VCMVolume() {
 }
 
 void Action_VCMVolume::update() {
-	VoiceChannelMember &vcm = voiceChannelMember();
+	const VoiceChannelMember *vcmp = voiceChannelMember();
+	const VoiceChannelMember& vcm = vcmp ? *vcmp : VoiceChannelMember::null;
 
-	const int targetState = int(!vcm.isValid || (isVolumeDown_ ? vcm.volume <= QDiscord::minVoiceVolume : vcm.volume >= QDiscord::maxVoiceVolume));
+	const int targetState = int(!vcmp || (isVolumeDown_ ? vcm.volume <= QDiscord::minVoiceVolume : vcm.volume >= QDiscord::maxVoiceVolume));
 	if(state_ != targetState) {
 		state_ = targetState;
 		setState(state_);
@@ -52,11 +53,11 @@ void Action_VCMVolume::onReleased() {
 }
 
 void Action_VCMVolume::trigger() {
-	VoiceChannelMember &vcm = voiceChannelMember();
-	if(!vcm.isValid)
+	VoiceChannelMember *vcm = voiceChannelMember();
+	if(!vcm)
 		return;
 
 	const int stepSize = plugin()->globalSetting("voiceChannelVolumeButtonStep").toInt();
 	const int numSteps = isVolumeDown_ ? -1 : 1;
-	plugin()->adjustVoiceChannelMemberVolume(vcm, stepSize, numSteps);
+	plugin()->adjustVoiceChannelMemberVolume(*vcm, stepSize, numSteps);
 }

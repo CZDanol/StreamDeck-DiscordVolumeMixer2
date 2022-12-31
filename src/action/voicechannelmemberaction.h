@@ -9,7 +9,7 @@ public:
 	VoiceChannelMemberAction();
 
 public:
-	VoiceChannelMember &voiceChannelMember();
+	VoiceChannelMember *voiceChannelMember();
 
 protected:
 	virtual void buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) override;
