@@ -121,17 +121,17 @@ void DVMPlugin::updateCurrentVoiceChannel(const QString &newVoiceChannel) {
 		"VOICE_STATE_UPDATE", "VOICE_STATE_CREATE", "VOICE_STATE_DELETE", "SPEAKING_START", "SPEAKING_STOP"
 	};
 	const auto evf = [&](const QString &cmd) {
-		const QJsonObject args{{"channel_id", newVoiceChannel}};
+		const QJsonObject args{{"channel_id", currentVoiceChannelID}};
 		for(const QString &e: events)
 			discord.sendCommand(cmd, args, {{"evt", e}});
 	};
 
-	if(!currentVoiceChannelID.isNull())
+	if(!currentVoiceChannelID.isEmpty())
 		evf(+QDiscord::CommandType::unsubscribe);
 
 	currentVoiceChannelID = newVoiceChannel;
 
-	if(!currentVoiceChannelID.isNull())
+	if(!currentVoiceChannelID.isEmpty())
 		evf(+QDiscord::CommandType::subscribe);
 }
 
