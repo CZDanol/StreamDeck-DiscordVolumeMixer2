@@ -54,6 +54,3 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 
 ## TODO
 * Self status button
-* QtStreamDeck create subfolder (for easier including)
-* Volume increase step also in the global settings
-* Prompts for authorization when entering both client ID and secret (check if the stuff is not empty first)
