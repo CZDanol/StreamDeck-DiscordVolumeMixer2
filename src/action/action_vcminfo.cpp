@@ -180,7 +180,7 @@ void Action_VCMInfo::onRotated(int delta) {
 }
 
 void Action_VCMInfo::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
-	b.addCheckBox("hideNobodyInVoiceChatText", "Hide NIVC", "Hide 'Nobody in voice chat' text (global)").linkWithGlobalSetting();
+	b.addCheckBox("hideNobodyInVoiceChatText", "Hide 'Nobody in voice chat' text (global)").linkWithGlobalSetting();
 
 	if(controller() == Controller::encoder) {
 		b.addSpinBox("voiceChannelVolumeEncoderStep", "Volume step").linkWithGlobalSetting();

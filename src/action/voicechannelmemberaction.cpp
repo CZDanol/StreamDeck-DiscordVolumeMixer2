@@ -30,8 +30,10 @@ VoiceChannelMember *VoiceChannelMemberAction::voiceChannelMember() {
 
 void VoiceChannelMemberAction::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
 	b.addLineEdit("user_ix", "User index or ID").linkWithActionSetting();
-	b.addMessage("Index in the channel users list, indexed from 0.");
-	b.addMessage("Alternatively, you can also use User ID (right click user -> copy ID) to set it to a specific user.");
+	b.addMessage(QStringList{
+		"Index in the channel users list, indexed from 0.",
+		"Alternatively, you can also use User ID (right click user -> copy ID) to set it to a specific user."
+	});
 
 	DVMAction::buildPropertyInspector(b);
 }
