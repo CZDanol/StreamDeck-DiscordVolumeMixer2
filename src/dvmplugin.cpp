@@ -26,6 +26,9 @@ DVMPlugin::DVMPlugin() {
 
 	connect(&discord, &QDiscord::messageReceived, this, &DVMPlugin::onDiscordMessageReceived);
 	connect(&discord, &QDiscord::avatarReady, this, &DVMPlugin::buttonsUpdateRequested);
+
+	discordConnectTimeoutTimer_.setSingleShot(true);
+	discordConnectTimeoutTimer_.setInterval(2000);
 }
 
 DVMPlugin::~DVMPlugin() {
@@ -209,6 +212,8 @@ void DVMPlugin::onStreamDeckEventReceived(const QStreamDeckEvent &e) {
 	using ET = QStreamDeckEvent::EventType;
 
 	// Try connecting to discord whenever any button is pressed
-	if(!discord.isConnected())
+	if(!discord.isConnected() && !discordConnectTimeoutTimer_.isActive()) {
+		discordConnectTimeoutTimer_.start();
 		connectToDiscord();
+	}
 }

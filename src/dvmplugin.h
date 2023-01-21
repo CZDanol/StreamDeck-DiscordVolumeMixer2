@@ -54,4 +54,7 @@ private slots:
 	void onDiscordMessageReceived(const QDiscordMessage &msg);
 	void onStreamDeckEventReceived(const QStreamDeckEvent &e);
 
+private:
+	QTimer discordConnectTimeoutTimer_;
+
 };

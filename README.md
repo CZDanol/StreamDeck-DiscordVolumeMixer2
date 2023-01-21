@@ -10,11 +10,20 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 * Supports **Standard, Mini, XL, Mobile and SD+ Decks**.
 * You can adjust the audio mixer panel to your needs, it's quite modular - you can move buttons around etc.
 * Tested on W10x64.
+* If you really feel like giving me some money, you can use [PayPal](https://www.paypal.com/donate/?hosted_button_id=QZC5P67TBTRX6).
 
 ![](etc/sshot.png)
 ![](etc/sshot2.png)
 
-### Support
+## Support
+
+### Common error codes:
+* `ERROR 002`: Your credentials are wrong
+  * Check that you've configured everything properly on the Discord Developer Portal, it has to be exactly as in the screenshot in the Configuration section.
+  * Make sure that you're connected on the Discord with the same accoutn you've used on the Discord Developer Portal.
+  * Try resetting your Client secretd in the Discord Developer Portal and putting a new one into the plugin.
+
+### Troubleshooting
 * **!!! First read Configuration below !!!**
 * If the plugin does not work:
    * Try uninstalling and reinstalling it.
@@ -23,7 +32,6 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
    * If that does not help, you can report the problem by following [these steps](DIAGNOSTICS.md).
 
 * If you have some feedback, ask around on [Stream Deck Labs Discord server](https://discord.com/invite/294BQE6Xdp) on the `#danols-plugin-support` channel.
-* If you really feel like giving me some money, you can use [PayPal](https://www.paypal.com/donate/?hosted_button_id=QZC5P67TBTRX6).
 
 ## Configuration
 1. Download and install the plugin from the Stream Deck Marketplace (preferred, handles auto updates) or from [the releases](https://github.com/CZDanol/StreamDeck-DiscordVolumeMixer2/releases).
