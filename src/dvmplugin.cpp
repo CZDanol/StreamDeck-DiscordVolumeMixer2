@@ -212,7 +212,7 @@ void DVMPlugin::onStreamDeckEventReceived(const QStreamDeckEvent &e) {
 	using ET = QStreamDeckEvent::EventType;
 
 	// Try connecting to discord whenever any button is pressed
-	if(!discord.isConnected() && !discordConnectTimeoutTimer_.isActive()) {
+	if(!discord.isConnected() && !discordConnectTimeoutTimer_.isActive() && (e.eventType == ET::touchTap || e.eventType == ET::keyDown || e.eventType == ET::dialPress || e.eventType == ET::dialRotate)) {
 		discordConnectTimeoutTimer_.start();
 		connectToDiscord();
 	}
