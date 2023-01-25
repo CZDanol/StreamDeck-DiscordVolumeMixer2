@@ -18,6 +18,11 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 ## Support
 
 ### Common problems:
+* `ERROR 001`: Could not connect to Discord
+   * Check that the Discord app is running.
+   * Check that the plugin is not blocked by firewall.
+   * Check that you're not running Discord or the Stream Deck software under different privilleges (say as admin).
+
 * `ERROR 002`: Your credentials are wrong
   * Check that you've configured everything properly on the Discord Developer Portal, it has to be exactly as in the screenshot in the Configuration section.
   * Make sure that you're connected on the Discord with the same account you've used on the Discord Developer Portal.
