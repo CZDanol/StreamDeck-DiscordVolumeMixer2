@@ -31,6 +31,8 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
   * Make sure that you're connected on the Discord with the same account you've used on the Discord Developer Portal.
   * Try resetting your Client secretd in the Discord Developer Portal and putting a new one into the plugin.
   
+* `ERROR 004`: Double check that you're using the same account in the Discord App as in the Developer Portal.
+  
 * Avatars are not visible, otherwise everything works.
   * Update the Stream Deck software.
 
