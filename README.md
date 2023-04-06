@@ -18,6 +18,9 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 ## Support
 
 ### Common problems:
+* Stuck on `Loading property inspector...`
+  * Try installing the [MSVC 2019 x64 runtime](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170).
+  
 * `ERROR 000`: Missing client ID/secret
   * You haven't filled the credentials. See the Configuration section below.
   
