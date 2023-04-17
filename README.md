@@ -21,20 +21,20 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 * Stuck on `Loading property inspector...`
   * Try installing the [MSVC 2019 x64 runtime](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170).
   
-* `ERROR 000`: Missing client ID/secret
+* `ERROR 000 | E0`: Missing client ID/secret
   * You haven't filled the credentials. See the Configuration section below.
   
-* `ERROR 001`: Could not connect to Discord
+* `ERROR 001 | E1`: Could not connect to Discord
    * Check that the Discord app is running.
    * Check that the plugin is not blocked by firewall.
    * Check that you're not running Discord or the Stream Deck software under different privilleges (say as admin).
 
-* `ERROR 002`: Your credentials are wrong
+* `ERROR 002 | E2`: Your credentials are wrong
   * Check that you've configured everything properly on the Discord Developer Portal, it has to be exactly as in the screenshot in the Configuration section.
   * Make sure that you're connected on the Discord with the same account you've used on the Discord Developer Portal.
   * Try resetting your Client secretd in the Discord Developer Portal and putting a new one into the plugin.
   
-* `ERROR 004`: Double check that you're using the same account in the Discord App as in the Developer Portal.
+* `ERROR 004 | E4`: Double check that you're using the same account in the Discord App as in the Developer Portal.
   
 * Avatars are not visible, otherwise everything works.
   * Update the Stream Deck software.

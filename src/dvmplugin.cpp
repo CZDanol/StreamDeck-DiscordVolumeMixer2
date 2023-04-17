@@ -26,6 +26,16 @@ DVMPlugin::DVMPlugin() {
 
 	connect(&discord, &QDiscord::messageReceived, this, &DVMPlugin::onDiscordMessageReceived);
 	connect(&discord, &QDiscord::avatarReady, this, &DVMPlugin::buttonsUpdateRequested);
+	connect(&discord, &QDiscord::disconnected, this, [this] {
+		currentVoiceChannelID.clear();
+		voiceChannelMembers.clear();
+		speakingVoiceChannelMembers.clear();
+		voiceChannelMemberIxOffset = 0;
+
+		discordReconnectTimer_.start();
+
+		emit buttonsUpdateRequested();
+	});
 
 	discordConnectTimeoutTimer_.setSingleShot(true);
 	discordConnectTimeoutTimer_.setInterval(2000);
@@ -40,13 +50,10 @@ DVMPlugin::~DVMPlugin() {
 }
 
 void DVMPlugin::connectToDiscord() {
-	discordReconnectTimer_.stop();
-
 	if(discord.isConnected())
 		return;
 
 	if(discord.connect(globalSetting("client_id").toString(), globalSetting("client_secret").toString())) {
-
 		// Subscribe to voice channel select event
 		discord.sendCommand(+QDiscord::CommandType::subscribe, {}, QJsonObject{
 			{"evt", "VOICE_CHANNEL_SELECT"}
@@ -62,6 +69,7 @@ void DVMPlugin::connectToDiscord() {
 		}
 
 		updateChannelMembersData();
+		discordReconnectTimer_.stop();
 	}
 	else {
 		emit buttonsUpdateRequested();
