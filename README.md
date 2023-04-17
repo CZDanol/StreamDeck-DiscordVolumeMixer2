@@ -18,6 +18,9 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 ## Support
 
 ### Common problems:
+* Stuck on `Loading property inspector...`
+  * Try installing the [MSVC 2019 x64 runtime](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170).
+  
 * `ERROR 000`: Missing client ID/secret
   * You haven't filled the credentials. See the Configuration section below.
   
@@ -30,6 +33,8 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
   * Check that you've configured everything properly on the Discord Developer Portal, it has to be exactly as in the screenshot in the Configuration section.
   * Make sure that you're connected on the Discord with the same account you've used on the Discord Developer Portal.
   * Try resetting your Client secretd in the Discord Developer Portal and putting a new one into the plugin.
+  
+* `ERROR 004`: Double check that you're using the same account in the Discord App as in the Developer Portal.
   
 * Avatars are not visible, otherwise everything works.
   * Update the Stream Deck software.
