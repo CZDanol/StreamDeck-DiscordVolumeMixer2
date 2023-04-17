@@ -29,6 +29,10 @@ DVMPlugin::DVMPlugin() {
 
 	discordConnectTimeoutTimer_.setSingleShot(true);
 	discordConnectTimeoutTimer_.setInterval(2000);
+
+	discordReconnectTimer_.setInterval(2500);
+	discordReconnectTimer_.callOnTimeout(this, &DVMPlugin::connectToDiscord);
+	discordReconnectTimer_.start();
 }
 
 DVMPlugin::~DVMPlugin() {
@@ -36,6 +40,8 @@ DVMPlugin::~DVMPlugin() {
 }
 
 void DVMPlugin::connectToDiscord() {
+	discordReconnectTimer_.stop();
+
 	if(discord.isConnected())
 		return;
 
@@ -57,8 +63,10 @@ void DVMPlugin::connectToDiscord() {
 
 		updateChannelMembersData();
 	}
-	else
+	else {
 		emit buttonsUpdateRequested();
+		discordReconnectTimer_.start();
+	}
 }
 
 void DVMPlugin::updateChannelMembersData() {

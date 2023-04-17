@@ -56,5 +56,6 @@ private slots:
 
 private:
 	QTimer discordConnectTimeoutTimer_;
+	QTimer discordReconnectTimer_;
 
 };
