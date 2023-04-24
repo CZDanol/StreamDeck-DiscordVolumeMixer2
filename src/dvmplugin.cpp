@@ -56,7 +56,7 @@ void DVMPlugin::connectToDiscord() {
 	if(discord.connect(globalSetting("client_id").toString(), globalSetting("client_secret").toString())) {
 		// Subscribe to voice channel select event
 		discord.sendCommand(+QDiscord::CommandType::subscribe, {}, QJsonObject{
-			{"evt", "VOICE_CHANNEL_SELECT"}
+			{"evt", "VOICE_CHANNEL_SELECT"},
 		});
 
 		{
@@ -188,9 +188,17 @@ void DVMPlugin::onDiscordMessageReceived(const QDiscordMessage &msg) {
 		}
 
 		case ET::voiceStateDelete: {
-			voiceChannelMembers.remove(VoiceChannelMember::fromJson(msg.data).userID);
+			const auto voiceData = VoiceChannelMember::fromJson(msg.data);
+			voiceChannelMembers.remove(voiceData.userID);
 			if(voiceChannelMemberIxOffset >= voiceChannelMembers.size())
 				voiceChannelMemberIxOffset = 0;
+
+			/*
+			 * Bug workaround - when voice state delete reports the current user, it possibly means that the user has been moved by admin to another voice channel, which does not trigger the VOICE_CHANNEL_SELECT event.
+			 * So in this case, we requery everything.
+			 * */
+			if(voiceData.userID == discord.userID())
+				updateChannelMembersData();
 
 			break;
 		}
