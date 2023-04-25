@@ -28,6 +28,7 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
    * Check that the Discord app is running.
    * Check that the plugin is not blocked by firewall.
    * Check that you're not running Discord or the Stream Deck software under different privilleges (say as admin).
+   * Try restarting the Discord.
 
 * `ERROR 002 | E2`: Your credentials are wrong
   * Check that you've configured everything properly on the Discord Developer Portal, it has to be exactly as in the screenshot in the Configuration section.
