@@ -21,7 +21,6 @@ auto computeParams(Action_VCMPaging &b) {
 		int maxOffset = 0;
 	};
 
-	qDebug() << b.settings();
 	const int step = b.setting("step").toInt();
 	if(!step)
 		return R{};
