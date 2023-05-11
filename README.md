@@ -33,7 +33,8 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 * `ERR 2`: Your credentials are wrong
   * Check that you've configured everything properly on the Discord Developer Portal, it has to be exactly as in the screenshot in the Configuration section.
   * Make sure that you're connected on the Discord with the same account you've used on the Discord Developer Portal.
-  * Try resetting your Client secretd in the Discord Developer Portal and putting a new one into the plugin.
+  * Try resetting your Client secret in the Discord Developer Portal and putting a new one into the plugin.
+  * After everything, restart the Discord client.
   
 * `ERR 4`: Double check that you're using the same account in the Discord App as in the Developer Portal.
 
