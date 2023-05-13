@@ -12,7 +12,7 @@ Action_VCMInfo::Action_VCMInfo() {
 
 	connect(this, &QStreamDeckAction::dialPressed, this, &Action_VCMInfo::onPressed);
 	connect(this, &QStreamDeckAction::dialRotated, this, &Action_VCMInfo::onRotated);
-	connect(this, &QStreamDeckAction::touchTap, this, &Action_VCMInfo::onPressed);
+	connect(this, &QStreamDeckAction::touchTap, this, &Action_VCMInfo::onTapped);
 }
 
 void Action_VCMInfo::update() {
@@ -23,8 +23,8 @@ void Action_VCMInfo::update() {
 }
 
 void Action_VCMInfo::update_button() {
-	const VoiceChannelMember *vcmp = voiceChannelMember();
-	const VoiceChannelMember& vcm = vcmp ? *vcmp : VoiceChannelMember::null;
+	const auto vcmp = voiceChannelMember();
+	const VoiceChannelMember &vcm = vcmp ? *vcmp.mem : VoiceChannelMember::null;
 
 	const bool isSpeaking = vcmp && plugin()->speakingVoiceChannelMembers.contains(vcm.userID);
 
@@ -75,8 +75,8 @@ void Action_VCMInfo::update_button() {
 }
 
 void Action_VCMInfo::update_encoder() {
-	const VoiceChannelMember *vcmp = voiceChannelMember();
-	const VoiceChannelMember& vcm = vcmp ? *vcmp : VoiceChannelMember::null;
+	const auto vcmp = voiceChannelMember();
+	const VoiceChannelMember &vcm = vcmp ? *vcmp.mem : VoiceChannelMember::null;
 
 	const bool isSpeaking = vcmp && plugin()->speakingVoiceChannelMembers.contains(vcm.userID);
 
@@ -86,8 +86,12 @@ void Action_VCMInfo::update_encoder() {
 		QString newTitle;
 		if(!plugin()->discord.isConnected())
 			newTitle = plugin()->discord.connectionError();
-		else if(vcmp)
-			newTitle = vcm.nick;
+		else if(vcmp) {
+			if(setting("showPaging").toBool())
+				newTitle += QStringLiteral("%1/%2 ").arg(QString::number(vcmp.userIndex + 1), QString::number(plugin()->voiceChannelMembers.size()));
+
+			newTitle += vcm.nick;
+		}
 		else if(plugin()->voiceChannelMembers.isEmpty() && !plugin()->globalSetting("hideNobodyInVoiceChatText").toBool())
 			newTitle = QString("NOBODY IN VOICE");
 
@@ -152,17 +156,11 @@ void Action_VCMInfo::update_encoder() {
 }
 
 void Action_VCMInfo::onPressed() {
-	VoiceChannelMember *vcm = voiceChannelMember();
-	if(!vcm)
-		return;
+	executeAction(Action(setting("pressAction").toInt()));
+}
 
-	vcm->isMuted ^= true;
-
-	plugin()->discord.sendCommand(+QDiscord::CommandType::setUserVoiceSettings, QJsonObject{
-		{"user_id", vcm->userID},
-		{"mute",    vcm->isMuted},
-	});
-	emit plugin()->buttonsUpdateRequested();
+void Action_VCMInfo::onTapped() {
+	executeAction(Action(setting("tapAction").toInt()));
 }
 
 void Action_VCMInfo::onReleased() {
@@ -171,21 +169,69 @@ void Action_VCMInfo::onReleased() {
 }
 
 void Action_VCMInfo::onRotated(int delta) {
-	VoiceChannelMember *vcm = voiceChannelMember();
-	if(!vcm)
+	const auto vcmp = voiceChannelMember();
+	if(!vcmp)
 		return;
 
 	const int stepSize = plugin()->globalSetting("voiceChannelVolumeEncoderStep").toInt();
-	plugin()->adjustVoiceChannelMemberVolume(*vcm, stepSize, delta);
+	plugin()->adjustVoiceChannelMemberVolume(*vcmp.mem, stepSize, delta);
+}
+
+void Action_VCMInfo::executeAction(Action_VCMInfo::Action a) {
+	switch(a) {
+
+		case Action::muteUnmute: {
+			const auto vcmp = voiceChannelMember();
+			if(!vcmp)
+				return;
+
+			auto vcm = vcmp.mem;
+
+			vcm->isMuted ^= true;
+
+			plugin()->discord.sendCommand(+QDiscord::CommandType::setUserVoiceSettings, QJsonObject{
+				{"user_id", vcm->userID},
+				{"mute",    vcm->isMuted},
+			});
+			emit plugin()->buttonsUpdateRequested();
+			break;
+		}
+
+		case Action::nextUser:
+			device()->voiceChannelMemberIndexOffset = (device()->voiceChannelMemberIndexOffset + 1) % plugin()->voiceChannelMembers.size();
+			emit plugin()->buttonsUpdateRequested();
+			break;
+
+		case Action::previousUser:
+			device()->voiceChannelMemberIndexOffset = (device()->voiceChannelMemberIndexOffset + plugin()->voiceChannelMembers.size() - 1) % plugin()->voiceChannelMembers.size();
+			emit plugin()->buttonsUpdateRequested();
+			break;
+
+		case Action::none:
+			break;
+
+	}
 }
 
 void Action_VCMInfo::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
 	b.addCheckBox("hideNobodyInVoiceChatText", "Hide 'Nobody in voice chat' text (global)").linkWithGlobalSetting();
 
+	static const QStringList actionSettings{
+		"Mute/unmute user",
+		"Next user",
+		"Previous user",
+		"None",
+	};
+	b.addComboBox("pressAction", "Press action", actionSettings).linkWithActionSetting();
+
 	if(controller() == Controller::encoder) {
+		b.addComboBox("tapAction", "Tap action", actionSettings).linkWithActionSetting();
+		b.addCheckBox("showPaging", "Show paging").linkWithActionSetting();
+
 		b.addSpinBox("voiceChannelVolumeEncoderStep", "Volume step").linkWithGlobalSetting();
 		b.addMessage("Volume step is global for all volume encoders.");
 	}
+
 
 	VoiceChannelMemberAction::buildPropertyInspector(b);
 }

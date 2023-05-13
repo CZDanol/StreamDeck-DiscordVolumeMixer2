@@ -15,17 +15,22 @@ void VoiceChannelMemberAction::onInitialized() {
 		setSetting("user_ix", QString::number(v.toInt()));
 }
 
-VoiceChannelMember *VoiceChannelMemberAction::voiceChannelMember() {
+VoiceChannelMemberAction::VoiceChannelMemberResult VoiceChannelMemberAction::voiceChannelMember() {
 	auto &lst = plugin()->voiceChannelMembers;
 
 	QString userID = setting("user_ix").toString();
 
+	VoiceChannelMemberResult r;
+
 	// If the ID length is too low, that means that it's index in the list, not the actual user ID
-	if(userID.length() < 4)
-		userID = lst.keys().value(userID.toInt() + device()->voiceChannelMemberIndexOffset);
+	if(userID.length() < 4) {
+		r.userIndex = userID.toInt() + device()->voiceChannelMemberIndexOffset;
+		userID = lst.keys().value(r.userIndex);
+	}
 
 	auto it = lst.find(userID);
-	return it != lst.end() ? &*it : nullptr;
+	r.mem = it != lst.end() ? &*it : nullptr;
+	return r;
 }
 
 void VoiceChannelMemberAction::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {

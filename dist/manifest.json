@@ -52,13 +52,13 @@
       "Encoder": {
         "TriggerDescription": {
           "Rotate": "Change user volume",
-          "Push": "Mute/unmute user",
-          "Touch": "Mute/unmute user"
+          "Push": "Configurable",
+          "Touch": "Configurable"
         }
       },
       "UserTitleEnabled": false,
       "PropertyInspectorPath": "qtstreamdeck2/propertyinspector.html",
-      "Tooltip": "Shows user avatar, status, volume. Pressing it mutes the user.",
+      "Tooltip": "Shows user avatar, status, volume.",
       "UUID": "cz.danol.discordmixer.user"
     },
     {

@@ -9,7 +9,15 @@ public:
 	VoiceChannelMemberAction();
 
 public:
-	VoiceChannelMember *voiceChannelMember();
+	struct VoiceChannelMemberResult {
+		VoiceChannelMember *mem = nullptr;
+		qsizetype userIndex = -1;
+
+		inline operator bool() const {
+			return mem;
+		}
+	};
+	VoiceChannelMemberResult voiceChannelMember();
 
 protected:
 	virtual void buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) override;

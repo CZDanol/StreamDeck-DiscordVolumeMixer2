@@ -6,6 +6,14 @@ class Action_VCMInfo : public VoiceChannelMemberAction {
 Q_OBJECT
 
 public:
+	enum class Action {
+		muteUnmute,
+		nextUser,
+		previousUser,
+		none
+	};
+
+public:
 	Action_VCMInfo();
 
 public slots:
@@ -22,6 +30,10 @@ private slots:
 	void onPressed();
 	void onReleased();
 	void onRotated(int delta);
+	void onTapped();
+
+private:
+	void executeAction(Action a);
 
 private:
 	QString title_ = "###";
