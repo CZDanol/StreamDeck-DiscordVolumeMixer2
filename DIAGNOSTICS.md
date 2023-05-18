@@ -1,5 +1,5 @@
 ### Sending error reports to Danol
-* Please first read the troubleshooting [https://github.com/CZDanol/StreamDeck-DiscordVolumeMixer2#common-problems](here) and try to resolve problem on your own.
+* Please first read the troubleshooting [here](https://github.com/CZDanol/StreamDeck-DiscordVolumeMixer2#common-problems) and try to resolve problem on your own.
 * Open `%appdata%/Elgato/StreamDeck/Plugins/cz.danol.discordmixer.sdPlugin/` in file explorer.
 * Create `clog.txt` in the directory. Those can be just empty files.
   * Make sure you don't create `clog.txt.txt` instead.
