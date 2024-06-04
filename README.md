@@ -19,37 +19,37 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 
 ### Common problems:
 * Stuck on `Loading property inspector...`
-  * Try installing the [MSVC 2019 x64 runtime](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170).
-  
+	* Try installing the [MSVC 2019 x64 runtime](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170).
+
 * `ERR 0`: Missing client ID/secret
-  * You haven't filled the credentials. See the Configuration section below.
-  
+	* You haven't filled the credentials. See the Configuration section below.
+
 * `ERR 1`: Could not connect to Discord
-   * Check that the Discord app is running.
-   * Check that the plugin is not blocked by firewall.
-   * Check that you're not running Discord or the Stream Deck software under different privilleges (say as admin).
-   * Try restarting the Discord.
+	 * Check that the Discord app is running.
+	 * Check that the plugin is not blocked by firewall.
+	 * Check that you're not running Discord or the Stream Deck software under different privilleges (say as admin).
+	 * Try restarting the Discord.
 
 * `ERR 2`: Your credentials are wrong
-  * Check that you've configured everything properly on the Discord Developer Portal, it has to be exactly as in the screenshot in the Configuration section.
-  * Make sure that you're connected on the Discord with the same account you've used on the Discord Developer Portal.
-  * Try resetting your Client secret in the Discord Developer Portal and putting a new one into the plugin.
-  * After everything, restart the Discord client.
-  
+	* Check that you've configured everything properly on the Discord Developer Portal, it has to be exactly as in the screenshot in the Configuration section.
+	* Make sure that you're connected on the Discord with the same account you've used on the Discord Developer Portal.
+	* Try resetting your Client secret in the Discord Developer Portal and putting a new one into the plugin.
+	* After everything, restart the Discord client.
+
 * `ERR 4`: Double check that you're using the same account in the Discord App as in the Developer Portal.
 
 * `ERR 8`: Try restarting the Discord client.
-  
+
 * Avatars are not visible, otherwise everything works.
-  * Update the Stream Deck software.
+	* Update the Stream Deck software.
 
 ### Troubleshooting
 * **!!! First read Configuration below !!!**
 * If the plugin does not work:
-   * Try uninstalling and reinstalling it.
-   * Make sure you're not running the Discord or the Stream Deck software with administrator privileges.
-   * Check if there are not multiple profiles for "Discord Volume Mixer". If yes, remove them all and try again.
-   * If that does not help, you can report the problem by following [these steps](DIAGNOSTICS.md).
+	 * Try uninstalling and reinstalling it.
+	 * Make sure you're not running the Discord or the Stream Deck software with administrator privileges.
+	 * Check if there are not multiple profiles for "Discord Volume Mixer". If yes, remove them all and try again.
+	 * If that does not help, you can report the problem by following [these steps](DIAGNOSTICS.md).
 
 * If you have some feedback, ask around on [Stream Deck Labs Discord server](https://discord.com/invite/294BQE6Xdp) on the `#danols-plugin-support` channel.
 
@@ -57,19 +57,23 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 1. Download and install the plugin from the Stream Deck Marketplace (preferred, handles auto updates) or from [the releases](https://github.com/CZDanol/StreamDeck-DiscordVolumeMixer2/releases).
 2. Add the "Discord Volume Mixer" button on your deck.
 3. Go to the [Discord developer portal](https://discordapp.com/developers) (if the link asks you for login and then shows the Discord app, close the window and click this link again) and create an application.
-   * **You must use the same account in to the Developer portal as in your Discord application, otherwise it won't work.** (You can add the other account as app tester though.)
-   * You're setting this stuff up for your own account, not for any bot or anything else.
+	 * **You must use the same account in to the Developer portal as in your Discord application, otherwise it won't work.** (You can add the other account as app tester though.)
+	 * You're setting this stuff up for your own account, not for any bot or anything else.
 4. Create a new application. You can name it however you like, for example "Discord Volume Mixer".
-5. In the newly created application details under Oauth2 settings (this page could be hidden under the menu button on the top left corner in smaller windows), set the redirect URI to `http://localhost:1337/callback`
+5. In the newly created application under "Installation" (this page could be hidden under the menu button on the top left corner in smaller windows), set "Install link" to "Discord provided link".
 6. Hit "Save changes".
-7. From the OAuth2 tab, copy `Client ID` and `Client secret` and paste it in your Discord Volume Mixer button settings (the button used to access the volume mixer).
-   * If you don't see the client secret, but only the "Reset Secret" button, simply click on the button, it will give you a new secret.
-8. Click on the Discord Volume Mixer button. Discord will ask you for some permissions & firewall and stuff.
-9. Done.
+7. Under "OAuth2", add redirect to `http://localhost:1337/callback`
+8. Hit "Save changes".
+9. Copy `Client ID` and `Client secret` and paste it in your Discord Volume Mixer button settings (the button used to access the volume mixer).
+	 * If you don't see the client secret, but only the "Reset Secret" button, simply click on the button, it will give you a new secret.
+10. Click on the Discord Volume Mixer button. Discord will ask you for some permissions & firewall and stuff.
+11. Done.
 
 **Don't play with the configuration of the buttons in the Volume Mixer profile unless you know what you're doing.**
 
 ![](etc/oauth.png)
+![](etc/oauth2.png)
+![](etc/streamdeck_settings.png)
 
 ## Third-party libraries, credits
 * Qt 6 (tested on Qt 6.2.1 MSVC 2019 Win x64)
