@@ -48,10 +48,10 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 ### Troubleshooting
 * **!!! First read Configuration below !!!**
 * If the plugin does not work:
-	 * Try uninstalling and reinstalling it.
-	 * Make sure you're not running the Discord or the Stream Deck software with administrator privileges.
-	 * Check if there are not multiple profiles for "Discord Volume Mixer". If yes, remove them all and try again.
-	 * If that does not help, you can report the problem by following [these steps](DIAGNOSTICS.md).
+	* Check the "common problems" above.
+  	* Try uninstalling and reinstalling it.
+  	* Make sure you're not running the Discord or the Stream Deck software with administrator privileges.
+	* Check if there are not multiple profiles for "Discord Volume Mixer". If yes, remove them all and try again.
 
 * If you have some feedback, ask around on [Stream Deck Labs Discord server](https://discord.com/invite/294BQE6Xdp) on the `#danols-plugin-support` channel.
 
