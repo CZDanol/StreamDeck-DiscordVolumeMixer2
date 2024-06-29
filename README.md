@@ -39,6 +39,7 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 * `ERR 4`: Double check that you're using the same account in the Discord App as in the Developer Portal.
 
 * `ERR 8`:
+	* Make sure your app in the Discord Developer Portal doesn't contain the word "Discord" in the name.
 	* Triple check the configuration in the Discord Developer Portal.
 	* Turn off both Discord and Stream Deck software. Then turn on Discord. After it fully loads, turn on Stream Deck.
 
