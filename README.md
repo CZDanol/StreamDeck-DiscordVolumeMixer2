@@ -61,15 +61,16 @@ This is a plugin for Stream Deck for managing Discord Voice chats:
 3. Go to the [Discord developer portal](https://discordapp.com/developers) (if the link asks you for login and then shows the Discord app, close the window and click this link again) and create an application.
 	 * **You must use the same account in to the Developer portal as in your Discord application, otherwise it won't work.** (You can add the other account as app tester though.)
 	 * You're setting this stuff up for your own account, not for any bot or anything else.
-4. Create a new application. You can name it however you like, for example "Discord Volume Mixer".
-5. In the newly created application under "Installation" (this page could be hidden under the menu button on the top left corner in smaller windows), set "Install link" to "Discord provided link".
-6. Hit "Save changes".
-7. Under "OAuth2", add redirect to `http://localhost:1337/callback`
-8. Hit "Save changes".
-9. Copy `Client ID` and `Client secret` and paste it in your Discord Volume Mixer button settings (the button used to access the volume mixer).
+4. Create a new application. You can name it however you like, for example "DVM".
+	 * **Do not use "Discord" in the name of the app, [apparently the Discord doesn't like it.](https://github.com/CZDanol/StreamDeck-DiscordVolumeMixer2/issues/26)**
+6. In the newly created application under "Installation" (this page could be hidden under the menu button on the top left corner in smaller windows), set "Install link" to "Discord provided link".
+7. Hit "Save changes".
+8. Under "OAuth2", add redirect to `http://localhost:1337/callback`
+9. Hit "Save changes".
+10. Copy `Client ID` and `Client secret` and paste it in your Discord Volume Mixer button settings (the button used to access the volume mixer).
 	 * If you don't see the client secret, but only the "Reset Secret" button, simply click on the button, it will give you a new secret.
-10. Click on the Discord Volume Mixer button. Discord will ask you for some permissions & firewall and stuff.
-11. Done.
+11. Click on the Discord Volume Mixer button. Discord will ask you for some permissions & firewall and stuff.
+12. Done.
 
 **Don't play with the configuration of the buttons in the Volume Mixer profile unless you know what you're doing.**
 
