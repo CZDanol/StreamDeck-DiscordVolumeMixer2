@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QGuiApplication>
 #include <QThread>
+#include <QSslSocket>
 
 void messageLogger(QtMsgType t, const QMessageLogContext &, const QString &msg) {
 	static QFile lf("log.txt"), clf("clog.txt");
@@ -33,8 +34,14 @@ int main(int argc, char *argv[]) {
 	//QThread::sleep(10);
 
 	QGuiApplication app(argc, argv);
+	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
 	qInstallMessageHandler(&messageLogger);
 	qDebug() << QDateTime::currentDateTime().toString() << "Plugin starting";
+	qDebug() << "Qt library paths" << QCoreApplication::libraryPaths();
+	qDebug() << "Available TLS backends" << QSslSocket::availableBackends();
+	if(QSslSocket::availableBackends().contains("schannel"))
+		QSslSocket::setActiveBackend("schannel");
+	qDebug() << "Active TLS backend" << QSslSocket::activeBackend();
 
 	DVMPlugin plugin;
 	plugin.init("cz.danol.discordmixer", app);
