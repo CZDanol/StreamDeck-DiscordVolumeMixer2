@@ -10,6 +10,11 @@
 #include "action/action_deafen.h"
 #include "action/action_microphone.h"
 
+namespace {
+constexpr int discordAuthRetryCooldownMs = 30000;
+constexpr int discordReconnectIntervalMs = 30000;
+}
+
 DVMPlugin::DVMPlugin() {
 	registerActionType<Action_OpenMixer>("cz.danol.discordmixer.openmixer");
 	registerActionType<Action_VCMInfo>("cz.danol.discordmixer.user");
@@ -38,9 +43,9 @@ DVMPlugin::DVMPlugin() {
 	});
 
 	discordConnectTimeoutTimer_.setSingleShot(true);
-	discordConnectTimeoutTimer_.setInterval(2000);
+	discordConnectTimeoutTimer_.setInterval(discordAuthRetryCooldownMs);
 
-	discordReconnectTimer_.setInterval(2500);
+	discordReconnectTimer_.setInterval(discordReconnectIntervalMs);
 	discordReconnectTimer_.callOnTimeout(this, &DVMPlugin::connectToDiscord);
 	discordReconnectTimer_.start();
 }
@@ -50,7 +55,7 @@ DVMPlugin::~DVMPlugin() {
 }
 
 void DVMPlugin::connectToDiscord() {
-	if(discord.isConnected())
+	if(discord.isConnected() || discord.isProcessing())
 		return;
 
 	if(discord.connect(globalSetting("client_id").toString(), globalSetting("client_secret").toString())) {
@@ -78,6 +83,9 @@ void DVMPlugin::connectToDiscord() {
 }
 
 void DVMPlugin::updateChannelMembersData() {
+	if(!discord.isConnected())
+		return;
+
 	QDiscordReply *r = discord.sendCommand(+QDiscord::CommandType::getSelectedVoiceChannel);
 	connect(r, &QDiscordReply::success, this, [this](const QDiscordMessage &msg) {
 		updateCurrentVoiceChannel(msg.data["id"].toString());
@@ -113,7 +121,6 @@ void DVMPlugin::updateSelfVoiceState(const QDiscordMessage &msg) {
 }
 
 void DVMPlugin::adjustVoiceChannelMemberVolume(VoiceChannelMember &vcm, float stepSize, int numSteps) {
-	const float step = globalSetting("voiceChannelVolumeButtonStep").toInt();
 	float newVolume = vcm.volume + stepSize * numSteps;
 	newVolume = qBound(QDiscord::minVoiceVolume, newVolume, QDiscord::maxVoiceVolume);
 	newVolume = qRound(newVolume / stepSize) * stepSize;

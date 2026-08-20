@@ -198,11 +198,17 @@ void Action_VCMInfo::executeAction(Action_VCMInfo::Action a) {
 		}
 
 		case Action::nextUser:
+			if(plugin()->voiceChannelMembers.isEmpty())
+				return;
+
 			device()->voiceChannelMemberIndexOffset = (device()->voiceChannelMemberIndexOffset + 1) % plugin()->voiceChannelMembers.size();
 			emit plugin()->buttonsUpdateRequested();
 			break;
 
 		case Action::previousUser:
+			if(plugin()->voiceChannelMembers.isEmpty())
+				return;
+
 			device()->voiceChannelMemberIndexOffset = (device()->voiceChannelMemberIndexOffset + plugin()->voiceChannelMembers.size() - 1) % plugin()->voiceChannelMembers.size();
 			emit plugin()->buttonsUpdateRequested();
 			break;

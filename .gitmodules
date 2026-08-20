@@ -3,4 +3,4 @@
 	url = https://github.com/CZDanol/QtStreamDeck2
 [submodule "deps/qtdiscordipc"]
 	path = deps/qtdiscordipc
-	url = https://github.com/CZDanol/QtDiscordIPC
+	url = https://github.com/hajrs/QtDiscordIPC
