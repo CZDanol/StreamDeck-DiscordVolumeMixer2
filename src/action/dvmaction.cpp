@@ -13,7 +13,8 @@ void DVMAction::buildPropertyInspector(QStreamDeckPropertyInspectorBuilder &b) {
 	b.addSection("Discord settings");
 	b.addLineEdit("client_id", "Client ID").linkWithGlobalSetting();
 	b.addLineEdit("client_secret", "Client secret").linkWithGlobalSetting();
-	b.addMessage("For configuration instructions, see the <a href=\"javascript: openUrl('https://github.com/CZDanol/StreamDeck-DiscordVolumeMixer2');\">GitHub page</a>.");
+	b.addMessage("Discord RPC works only for approved applications, owners/team members, or users added as RPC testers. Never share your Client secret; reset it immediately if exposed.");
+	b.addMessage("For configuration instructions, see the <a href=\"javascript: openUrl('https://github.com/thomasthanos/StreamDeck-DiscordVolumeMixer-2026');\">GitHub page</a>.");
 }
 
 void DVMAction::onInitialized() {

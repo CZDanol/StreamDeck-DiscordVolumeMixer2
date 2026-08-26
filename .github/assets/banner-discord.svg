@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 240" width="1200" height="240" role="img" aria-label="Stream Deck Discord Volume Mixer">
+  <defs>
+    <linearGradient id="bgCard" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14161a"/>
+      <stop offset=".55" stop-color="#0f1013"/>
+      <stop offset="1" stop-color="#090a0c"/>
+    </linearGradient>
+    <radialGradient id="blurpleGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#5865F2" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#5865F2" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="greenGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#23A55A" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#23A55A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bannerTitle" gradientUnits="userSpaceOnUse" x1="60" y1="0" x2="800" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".45" stop-color="#E0E4FF"/>
+      <stop offset="1" stop-color="#8EA0FF"/>
+    </linearGradient>
+    <linearGradient id="hairline" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".03"/>
+    </linearGradient>
+    <linearGradient id="bannerRule" gradientUnits="userSpaceOnUse" x1="64" y1="0" x2="120" y2="0">
+      <stop offset="0" stop-color="#23A55A" stop-opacity=".95"/>
+      <stop offset=".5" stop-color="#5865F2" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#5865F2" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="sweepGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#ffffff" stop-opacity=".04"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="keyBezel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b2d31"/>
+      <stop offset="1" stop-color="#18191c"/>
+    </linearGradient>
+    <linearGradient id="keyInner" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e1f22"/>
+      <stop offset="1" stop-color="#111214"/>
+    </linearGradient>
+    <pattern id="dotGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="16" cy="16" r="1" fill="#5865F2" fill-opacity=".12"/>
+    </pattern>
+    <clipPath id="bannerClip"><rect x="0" y="0" width="1200" height="240" rx="24"/></clipPath>
+  </defs>
+  <style>
+    @keyframes driftA { 0%,100% { transform: translate(0,0) } 50% { transform: translate(24px,-14px) } }
+    @keyframes driftB { 0%,100% { transform: translate(0,0) } 50% { transform: translate(-20px,16px) } }
+    @keyframes sweepAnimation { 0% { transform: translateX(-560px) } 100% { transform: translateX(1360px) } }
+    @keyframes pulseRing { 0%,100% { stroke-opacity:.9; filter: drop-shadow(0 0 2px #23A55A); } 50% { stroke-opacity:.4; filter: none; } }
+    @keyframes wavePulse { 0%,100% { opacity:.95; } 50% { opacity:.4; } }
+    .d1 { animation: driftA 14s ease-in-out infinite; }
+    .d2 { animation: driftB 18s ease-in-out infinite; }
+    .sw { animation: sweepAnimation 9s linear infinite; }
+    .p-ring { animation: pulseRing 3s ease-in-out infinite; }
+    .w1 { animation: wavePulse 2.5s ease-in-out infinite; }
+    .w2 { animation: wavePulse 2.5s ease-in-out infinite .4s; }
+    .w3 { animation: wavePulse 2.5s ease-in-out infinite .8s; }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important } }
+  </style>
+  <g clip-path="url(#bannerClip)">
+    <rect width="1200" height="240" fill="url(#bgCard)"/>
+    <rect width="1200" height="240" fill="url(#dotGrid)"/>
+    <g class="d1"><ellipse cx="160" cy="10" rx="380" ry="210" fill="url(#greenGlow)"/></g>
+    <g class="d2"><ellipse cx="1080" cy="220" rx="440" ry="240" fill="url(#blurpleGlow)"/></g>
+    
+    <!-- Ultra-crisp Stream Deck Hardware Key on the right -->
+    <g transform="translate(1005, 48)">
+      <!-- Outer Key Frame -->
+      <rect width="144" height="144" rx="28" fill="url(#keyBezel)" stroke="url(#hairline)" stroke-width="1.5"/>
+      <!-- Inner Key Screen -->
+      <rect x="8" y="8" width="128" height="128" rx="20" fill="url(#keyInner)"/>
+      
+      <!-- Speaking Ring (Discord Green #23A55A) -->
+      <rect x="12" y="12" width="120" height="120" rx="16" fill="none" stroke="#23A55A" stroke-width="2.5" class="p-ring"/>
+      
+      <!-- High-Quality Audio Speaker & Waveform Icon -->
+      <g transform="translate(36, 42)">
+        <!-- Speaker body -->
+        <path d="M4 22h10l15-13v42l-15-13H4a2 2 0 0 1-2-2V24a2 2 0 0 1 2-2z" fill="#5865F2"/>
+        <!-- Soundwaves (smooth geometric arcs) -->
+        <path class="w1" d="M37 20a14 14 0 0 1 0 20" fill="none" stroke="#DBDEE1" stroke-width="3.5" stroke-linecap="round"/>
+        <path class="w2" d="M44 14a24 24 0 0 1 0 32" fill="none" stroke="#5865F2" stroke-width="3.5" stroke-linecap="round"/>
+        <path class="w3" d="M51 8a34 34 0 0 1 0 44" fill="none" stroke="#23A55A" stroke-width="3.5" stroke-linecap="round"/>
+      </g>
+      
+      <!-- Live Volume Badge on Key -->
+      <rect x="42" y="106" width="60" height="20" rx="10" fill="#23A55A" fill-opacity=".2" stroke="#23A55A" stroke-width="1"/>
+      <text x="72" y="120" text-anchor="middle" font-family='"Segoe UI",sans-serif' font-size="10" font-weight="800" fill="#57F287" letter-spacing=".5">100%</text>
+    </g>
+    
+    <rect class="sw" x="-560" y="0" width="560" height="240" fill="url(#sweepGrad)"/>
+  </g>
+  <rect x=".75" y=".75" width="1198.5" height="238.5" rx="24" fill="none" stroke="url(#hairline)" stroke-width="1.5"/>
+  <g font-family='"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif'>
+    <rect x="64" y="44" width="44" height="4" rx="2" fill="url(#bannerRule)"/>
+    <text x="64" y="78" font-size="13" font-weight="700" letter-spacing="3.2" fill="#5865F2">STREAM DECK AUDIO PLUGIN</text>
+    <text x="62" y="142" font-size="44" font-weight="800" letter-spacing="-1.2" fill="url(#bannerTitle)">Discord Volume Mixer</text>
+    <text x="64" y="180" font-size="18.5" font-weight="500" fill="#949BA4">Per-user voice mixing, live speaking detection &amp; dial controls on your desk.</text>
+    <g>
+      <rect x="1030" y="196" width="106" height="30" rx="15" fill="#ffffff" fill-opacity=".06" stroke="url(#hairline)" stroke-width="1"/>
+      <text x="1083.0" y="216" text-anchor="middle" font-size="13.5" font-weight="700" letter-spacing=".5" fill="#DBDEE1">v2.0.3.0</text>
+    </g>
+  </g>
+</svg>

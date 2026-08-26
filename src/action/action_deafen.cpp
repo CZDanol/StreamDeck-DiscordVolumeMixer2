@@ -15,6 +15,9 @@ void Action_Deafen::update() {
 }
 
 void Action_Deafen::onPressed() {
+	if(!plugin()->discord.isConnected())
+		return;
+
 	plugin()->isDeafened ^= true;
 	plugin()->isMicrophoneMuted |= plugin()->isDeafened;
 	plugin()->discord.sendCommand(+QDiscord::CommandType::setVoiceSettings, {{"deaf", plugin()->isDeafened}});

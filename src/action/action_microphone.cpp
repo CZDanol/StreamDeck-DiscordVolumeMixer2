@@ -15,6 +15,9 @@ void Action_Microphone::update() {
 }
 
 void Action_Microphone::onPressed() {
+	if(!plugin()->discord.isConnected())
+		return;
+
 	plugin()->isMicrophoneMuted ^= true;
 	plugin()->discord.sendCommand(+QDiscord::CommandType::setVoiceSettings, {{"mute", plugin()->isMicrophoneMuted}});
 	emit plugin()->buttonsUpdateRequested();

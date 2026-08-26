@@ -23,5 +23,6 @@ private:
 	QString title_ = "###";
 	int state_ = -1;
 	bool isBackButton_ = false;
+	bool isRegistered_ = false;
 
 };

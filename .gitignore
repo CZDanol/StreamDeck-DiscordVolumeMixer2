@@ -1,3 +1,71 @@
-/build/
+# Build Directories & Artifacts
 /bin/
+/build/
+/build-*/
+/build_*/
+/cmake-build-*/
+/release/
+/out/
+CMakeLists.txt.user*
+CMakeUserPresets.json
+
+# Compilers & Object Files
+*.obj
+*.o
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.exp
+*.ilk
+*.pdb
+*.idb
+
+# Qt Generated Files
+*.moc
+moc_*.cpp
+mocs_compilation.cpp
+ui_*.h
+qrc_*.cpp
+.rcc/
+.moc/
+.obj/
+.ui/
+
+# IDE & Editor Configurations
 .idea/
+.vscode/
+.vs/
+*.suo
+*.user
+*.user.*
+*.vcxproj.user
+*.workspace
+*.layout
+*.autosave
+
+# Runtime Data, Logs & Secrets
+log.txt
+clog.txt
+*.log
+discordOauth.json
+**/discordOauth.json
+
+# Stream Deck Packaging
+*.streamDeckPlugin
+
+# OS Specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Tools & Helper Scripts
+/tools/
+tools/

@@ -11,7 +11,8 @@ Action_VCMPaging::Action_VCMPaging() {
 }
 
 Action_VCMPaging::~Action_VCMPaging() {
-	(isBackButton_ ? device()->vcmPrevPageButtonCount : device()->vcmNextPageButtonCount)--;
+	if(isRegistered_)
+		(isBackButton_ ? device()->vcmPrevPageButtonCount : device()->vcmNextPageButtonCount)--;
 }
 
 auto computeParams(Action_VCMPaging &b) {
@@ -21,9 +22,7 @@ auto computeParams(Action_VCMPaging &b) {
 		int maxOffset = 0;
 	};
 
-	const int step = b.setting("step").toInt();
-	if(!step)
-		return R{};
+	const int step = qMax(1, b.setting("step").toInt());
 
 	const int pageCount = static_cast<int>(b.plugin()->voiceChannelMembers.size() + step - 1) / step;
 	return R{
@@ -67,15 +66,19 @@ void Action_VCMPaging::onInitialized() {
 	if(const auto v = setting("step"); v.isString())
 		setSetting("step", v.toString().toInt());
 
-	isBackButton_ = (actionUID() == "cz.danol.discordmixer.previouspage");
+	isBackButton_ = (actionUID() == "com.thomast.discordmixer.previouspage");
 	(isBackButton_ ? device()->vcmPrevPageButtonCount : device()->vcmNextPageButtonCount)++;
+	isRegistered_ = true;
 }
 
 void Action_VCMPaging::onPressed() {
 	const auto p = computeParams(*this);
+	if(p.pageCount < 2)
+		return;
 
 	auto &offset = device()->voiceChannelMemberIndexOffset;
-	int newOffset = offset + setting("step").toInt() * (isBackButton_ ? -1 : 1);
+	const int step = qMax(1, setting("step").toInt());
+	int newOffset = offset + step * (isBackButton_ ? -1 : 1);
 	if(newOffset > p.maxOffset)
 		newOffset = 0;
 	else if(newOffset < 0)

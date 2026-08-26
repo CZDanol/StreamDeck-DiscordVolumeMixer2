@@ -40,6 +40,7 @@ private:
 	QString userID_;
 	bool hasAvatar_ = false;
 	int state_ = -1;
+	QString buttonRenderKey_;
 
 private:
 	QString feedbackLayout_ = "###";

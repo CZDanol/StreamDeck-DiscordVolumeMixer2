@@ -1,0 +1,92 @@
+Copyright (c) 2026 Thomas Thanos. All rights reserved.
+
+This repository contains the source code, profiles, assets, and modern build system
+for the Stream Deck Discord Volume Mixer plugin (the "Software").
+
+The Software is source-available, NOT open source. The source is published so that anyone
+can read, build, and audit exactly what the plugin does. Publishing it does not place it in the
+public domain and does not grant permission for unauthorized redistribution or re-publishing.
+
+
+1. WHAT YOU MAY DO
+
+   a) Use it. You may install and use an official build of the Software, as published by
+      the copyright holder, for your own personal, non-commercial purposes, for as long as
+      you like and at no cost.
+
+   b) Read & Build it. You may view, read, study, and compile the source code in this
+      repository for your own personal use.
+
+   c) Fork it on GitHub, for review only. Because this repository is public, GitHub's
+      Terms of Service permit other GitHub users to fork it. That is acknowledged here.
+      Such a fork may be used only to read, review, audit, or prepare a contribution.
+      Every restriction in section 2 continues to apply to the contents of any fork.
+
+   d) Contribute. You may open issues and submit pull requests. See section 4.
+
+
+2. WHAT YOU MAY NOT DO
+
+   Without prior written permission from the copyright holder, you may not:
+
+   a) Redistribute the Software, in source or built form, in whole or in part.
+
+   b) Publish the Software, or anything derived from it, to any app store, marketplace,
+      package registry, website, or distribution channel. This includes the Elgato Stream Deck
+      Marketplace and Corsair ecosystem.
+
+   c) Sell, rent, license, sublicense, or otherwise commercially exploit the Software, or
+      use it in or alongside any product, service, or offering that generates revenue.
+
+   d) Create, distribute, or publish modified, derivative, or repackaged versions of the Software.
+
+   e) Remove, obscure, or alter any copyright, licence, or attribution notice.
+
+
+3. NAME, ICONS, AND STORE ASSETS
+
+   The name "Discord Volume Mixer", custom artwork, icons in src/plugin/icons/, profile files,
+   and visual assets are protected. Nothing in this licence grants any right to use them
+   outside of personal local use. A review fork is not permitted to carry the branding
+   or re-publish the assets.
+
+
+4. CONTRIBUTIONS
+
+   By submitting a pull request or any other contribution, you grant the copyright holder
+   a perpetual, worldwide, irrevocable, royalty-free right to use, modify, and distribute
+   your contribution as part of the Software. You confirm that the contribution is your own
+   work and that you are entitled to grant this.
+
+
+5. THIRD-PARTY NOTICES & UPSTREAM ATTRIBUTION
+
+   The Software builds upon and incorporates libraries and original work from third parties:
+   - Original project core by Danol (CZDanol)
+   - Qt Framework (The Qt Company)
+   - Icons8 artwork (Icons8 LLC)
+   See THIRD-PARTY-NOTICES.md for third-party acknowledgments. Nothing here claims ownership
+   of third-party intellectual property.
+
+
+6. NO WARRANTY
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+   INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+   PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE
+   LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+   TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE
+   USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+7. NOT AFFILIATED
+
+   Stream Deck Discord Volume Mixer is an independent community project and is not affiliated
+   with, endorsed by, or connected to Discord Inc., Elgato, or Corsair. All product names
+   and trademarks belong to their respective owners.
+
+
+8. PERMISSION REQUESTS
+
+   Want to do something this licence does not allow? Ask:
+   https://github.com/thomasthanos/StreamDeck-DiscordVolumeMixer-2026/issues
